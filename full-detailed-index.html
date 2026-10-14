@@ -1,0 +1,3263 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="pageTitle">ParaFlow Reader - Speed Reader</title>
+    <meta name="description"
+        data-i18n-content="metaDescription"
+        content="ParaFlow Reader eliminates RSVP Reader problems with cognitive context using optical recognition point foveation, and dynamic-weighted cadence.">
+    <meta property="og:title" data-i18n-content="ogTitle" content="ParaFlow Reader - Speed Reader">
+    <meta property="og:description"
+        data-i18n-content="ogDescription"
+        content="Preserve peripheral reading context and eliminate unvoluntary saccadic fixations with Paraflow speed reading.">
+    <meta property="og:type" content="website">
+    <meta name="color-scheme" content="dark light">
+    <meta name="darkreader-lock">
+    <meta name="darkreader" content="no">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="style/full-detailed-style.css" as="style">
+    <link rel="preload" href="js/full-detailed-client.js" as="script">
+    <link rel="stylesheet" href="style/full-detailed-style.css">
+    <style>
+@import "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap";
+
+/* src/landing/styles/tokens.css */
+:root {
+  color-scheme: dark light;
+  --bg-canvas: oklch(0.14 0.018 250);
+  --bg-base: var(--bg-canvas);
+  --bg-surface-1: oklch(0.17 0.022 250);
+  --bg-surface-2: oklch(0.21 0.025 250);
+  --bg-surface-3: oklch(0.25 0.028 250);
+  --bg-surface-elevated: oklch(0.19 0.024 250);
+  --bg-canvas-seethrough: oklch(14.041% 0.01784 243.261 / 0.5);
+  --border-subtle: oklch(0.26 0.02 250);
+  --border-strong: oklch(0.36 0.03 250);
+  --border-focus: oklch(0.74 0.16 55);
+  --text-primary: oklch(0.96 0.005 250);
+  --text-secondary: oklch(0.82 0.012 250);
+  --text-muted: oklch(0.62 0.015 250);
+  --text-on-accent: oklch(0.12 0.02 250);
+  --accent-amber: oklch(0.74 0.16 55);
+  --accent-amber-subtle: oklch(0.24 0.05 55);
+  --accent-amber-glow: oklch(0.74 0.16 55 / 0.15);
+  --accent-cyan: oklch(0.76 0.13 210);
+  --accent-cyan-subtle: oklch(0.24 0.04 210);
+  --accent-reticle: oklch(0.68 0.22 25);
+  --accent-reticle-bg: oklch(0.68 0.22 25 / 0.18);
+  --accent-emerald: oklch(0.74 0.15 155);
+  --accent-emerald-subtle: oklch(0.24 0.04 155);
+  --font-display:
+    "Fraunces",
+    "Newsreader",
+    Georgia,
+    serif;
+  --font-body:
+    "Plus Jakarta Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  --font-mono:
+    "Space Mono",
+    "Fast_Mono",
+    "Commit Mono",
+    monospace;
+  --text-xs: 0.8rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.25rem;
+  --text-lg: 1.563rem;
+  --text-xl: 1.953rem;
+  --text-2xl: 2.441rem;
+  --text-3xl: 3.052rem;
+  --text-4xl: 3.815rem;
+  --radius-outer-lg: 1.25rem;
+  --radius-outer-md: 0.875rem;
+  --radius-outer-sm: 0.5rem;
+  --radius-pill: 9999px;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4.5rem;
+  --space-4xl: 6rem;
+  --container-max: 76rem;
+  --content-narrow: 46rem;
+  --card-bg: var(--bg-surface-1);
+  --card-border: var(--border-strong);
+  --card-border-subtle: var(--border-subtle);
+  --card-radius: var(--radius-outer-md);
+  --card-radius-lg: var(--radius-outer-lg);
+  --card-shadow: 0 12px 28px oklch(0 0 0 / 0.26);
+  --card-shadow-heavy: 0 20px 48px oklch(0 0 0 / 0.35);
+  --glass-blur: 14px;
+}
+[data-theme=light] {
+  color-scheme: light;
+  --bg-canvas: oklch(0.97 0.008 80);
+  --bg-base: var(--bg-canvas);
+  --bg-surface-1: oklch(0.93 0.012 80);
+  --bg-surface-2: oklch(0.89 0.015 80);
+  --bg-surface-3: oklch(0.85 0.018 80);
+  --bg-surface-elevated: oklch(0.98 0.005 80);
+  --border-subtle: oklch(0.82 0.015 80);
+  --border-strong: oklch(0.68 0.025 80);
+  --border-focus: oklch(0.55 0.16 55);
+  --text-primary: oklch(0.18 0.015 250);
+  --text-secondary: oklch(0.32 0.02 250);
+  --text-muted: oklch(0.50 0.02 250);
+  --text-on-accent: oklch(0.98 0.005 80);
+  --darkreader-text--text-primary: oklch(0.18 0.015 250);
+  --darkreader-text--text-secondary: oklch(0.32 0.02 250);
+  --darkreader-text--text-muted: oklch(0.50 0.02 250);
+  --darkreader-text-000000: oklch(0.18 0.015 250);
+  --darkreader-bg--bg-canvas: oklch(0.97 0.008 80);
+  --darkreader-bg--bg-surface-1: oklch(0.93 0.012 80);
+  --darkreader-bg--bg-surface-2: oklch(0.89 0.015 80);
+  --darkreader-bg--bg-surface-3: oklch(0.85 0.018 80);
+  --darkreader-bg--bg-surface-elevated: oklch(0.98 0.005 80);
+  --darkreader-border--border-subtle: oklch(0.82 0.015 80);
+  --darkreader-border--border-strong: oklch(0.68 0.025 80);
+  --accent-amber: oklch(0.58 0.16 55);
+  --accent-amber-subtle: oklch(0.92 0.04 55);
+  --accent-amber-glow: oklch(0.58 0.16 55 / 0.12);
+  --accent-cyan: oklch(0.52 0.14 210);
+  --accent-cyan-subtle: oklch(0.90 0.03 210);
+  --accent-reticle: oklch(0.55 0.22 25);
+  --accent-reticle-bg: oklch(0.55 0.22 25 / 0.15);
+  --accent-emerald: oklch(0.52 0.15 155);
+  --accent-emerald-subtle: oklch(0.91 0.03 155);
+  --stage-overlay-bg:
+    linear-gradient(
+      135deg,
+      oklch(0.90 0.02 80 / 0.45) 0%,
+      oklch(0.94 0.015 75 / 0.40) 100%);
+  --stage-overlay-opacity: 0.40;
+  --stage-overlay-hover-opacity: 0.18;
+  --stage-overlay-vignette: oklch(0.85 0.02 80 / 0.40);
+  --stage-vignette-opacity: 0.35;
+  --stage-vignette-hover-opacity: 0.15;
+  --stage-img-brightness: 0.98;
+  --stage-img-contrast: 1.02;
+  --stage-img-hover-brightness: 1.02;
+  --stage-img-hover-contrast: 1.05;
+  --card-shadow: 0 8px 24px oklch(0 0 0 / 0.08);
+  --card-shadow-heavy: 0 14px 36px oklch(0 0 0 / 0.12);
+}
+
+/* src/landing/styles/reset.css */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  min-height: 100vh;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings:
+    "calt" 1,
+    "kern" 1,
+    "tnum" 1;
+}
+body:not(.page-ready) {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+body.page-ready {
+  opacity: 1;
+  transition: opacity 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  body.page-ready {
+    transition: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+.skip-link {
+  position: absolute;
+  top: -999px;
+  left: 1rem;
+  z-index: 1000;
+  padding: var(--space-xs) var(--space-md);
+  background: var(--accent-amber);
+  color: var(--text-on-accent);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: var(--radius-outer-sm);
+}
+.skip-link:focus {
+  top: 1rem;
+  outline: 3px solid var(--text-primary);
+}
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 3px;
+}
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+a {
+  color: inherit;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+}
+.container-narrow {
+  width: 100%;
+  max-width: var(--content-narrow);
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+}
+@media (max-width: 480px) {
+  .container,
+  .container-narrow {
+    padding-inline: var(--space-md);
+  }
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: 0.75rem 1.4rem;
+  background: var(--accent-amber);
+  color: var(--text-on-accent);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: var(--radius-outer-sm);
+  box-shadow: 0 4px 14px var(--accent-amber-glow);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: 0.75rem 1.4rem;
+  background: var(--bg-surface-1);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-outer-sm);
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+.btn-secondary:hover {
+  background: var(--bg-surface-2);
+  border-color: var(--accent-cyan);
+}
+.section-wrapper {
+  padding-block: var(--space-4xl);
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  overflow: hidden;
+}
+.section-wrapper > .container {
+  position: relative;
+  z-index: 2;
+}
+.section-header {
+  margin-bottom: var(--space-3xl);
+}
+.section-kicker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--accent-amber);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-2xs);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-xl), 3.5vw, var(--text-3xl));
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+.section-subtitle {
+  font-size: var(--text-md);
+  color: var(--text-secondary);
+  max-width: 44rem;
+  line-height: 1.6;
+}
+.section-parallax-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  user-select: none;
+}
+.parallax-layer {
+  position: absolute;
+  left: -8%;
+  width: 116%;
+  bottom: -24px;
+  top: auto;
+  height: 100%;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+.parallax-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom center;
+  display: block;
+}
+@media (max-width: 768px) {
+  .parallax-layer {
+    height: 75%;
+    bottom: -16px;
+  }
+}
+@media (max-width: 480px) {
+  .parallax-layer {
+    height: 60%;
+    bottom: -12px;
+  }
+}
+
+/* src/landing/layout/Navigation/navigation.styles.css */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg-canvas);
+  border-bottom: 1px solid var(--border-subtle);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4.25rem;
+  gap: var(--space-lg);
+}
+.brand-anchor {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+.brand-anchor .ext-tagline {
+  position: absolute;
+  bottom: -1.2rem;
+  display: none;
+  align-items: center;
+  padding: 0.2em 0.5em;
+  border-radius: 0.3em;
+  border: 1px solid var(--accent-amber-subtle);
+  background-color: var(--bg-canvas);
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--accent-amber);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+@media (min-width: 1200px) {
+  .brand-anchor .ext-tagline {
+    display: inline-flex;
+  }
+}
+.brand-icon-skeleton {
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+.brand-skeleton-disc {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    linear-gradient(
+      90deg,
+      var(--bg-surface-2, rgba(255,255,255,0.06)) 0%,
+      var(--accent-amber-subtle, rgba(229,154,53,0.3)) 50%,
+      var(--bg-surface-2, rgba(255,255,255,0.06)) 100%);
+  background-size: 200% 100%;
+  animation: brandShimmer 1.8s infinite ease-in-out;
+  pointer-events: none;
+  transition: opacity 0.5s ease-out;
+}
+@keyframes brandShimmer {
+  0% {
+    background-position: 200% 0;
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.95;
+  }
+  100% {
+    background-position: -200% 0;
+    opacity: 0.5;
+  }
+}
+.brand-skeleton-reticle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--accent-amber);
+  transition: opacity 0.5s ease-out;
+}
+.brand-icon-hd {
+  position: relative;
+  z-index: 1;
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+.has-hd-loaded .brand-icon-hd,
+.brand-icon-hd.is-loaded {
+  opacity: 1;
+}
+.has-hd-loaded .brand-skeleton-disc,
+.has-hd-loaded .brand-skeleton-reticle {
+  opacity: 0;
+}
+.brand-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--accent-amber);
+  flex-shrink: 0;
+}
+.desktop-nav {
+  display: flex;
+  align-items: center;
+}
+.primary-nav-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: var(--space-lg);
+}
+.nav-link {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 150ms ease;
+  white-space: nowrap;
+}
+.nav-link:hover {
+  color: var(--accent-amber);
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+.btn-header-download {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 0.42rem 0.85rem;
+  border-radius: var(--radius-outer-sm);
+  border: 1px solid var(--accent-amber-subtle, rgba(229, 154, 53, 0.35));
+  background: var(--accent-amber-subtle, rgba(229, 154, 53, 0.12));
+  color: var(--accent-amber);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 120ms ease,
+    box-shadow 120ms ease;
+  flex-shrink: 0;
+  svg {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+}
+.btn-header-download:hover {
+  background: var(--accent-amber);
+  color: var(--text-on-accent);
+  border-color: var(--accent-amber);
+  box-shadow: 0 2px 10px var(--accent-amber-glow);
+  transform: translateY(-1px);
+}
+.btn-header-download:active {
+  transform: translateY(0);
+}
+@media (max-width: 480px) {
+  .btn-header-download span {
+    display: none;
+  }
+  .btn-header-download {
+    padding: 0.45rem 0.55rem;
+  }
+}
+.btn-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-outer-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface-1);
+  color: var(--text-secondary);
+  transition: background-color 150ms ease, border-color 150ms ease;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.btn-theme-toggle:hover {
+  background: var(--bg-surface-2);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+.btn-github {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-outer-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--bg-surface-2);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: background-color 150ms ease, border-color 150ms ease;
+  flex-shrink: 0;
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+.btn-github:hover {
+  background: var(--bg-surface-3);
+  border-color: var(--accent-amber);
+}
+.btn-hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-outer-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface-1);
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 150ms ease, border-color 150ms ease;
+  flex-shrink: 0;
+}
+.btn-hamburger:hover {
+  background: var(--bg-surface-2);
+  border-color: var(--border-strong);
+}
+.btn-hamburger:focus-visible {
+  outline: 2px solid var(--accent-amber);
+  outline-offset: 2px;
+}
+.hamburger-box {
+  width: 16px;
+  height: 12px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.hamburger-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 1px;
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), opacity 180ms ease;
+  transform-origin: center;
+}
+.btn-hamburger[aria-expanded=true] .bar-top {
+  transform: translateY(5px) rotate(45deg);
+}
+.btn-hamburger[aria-expanded=true] .bar-mid {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.btn-hamburger[aria-expanded=true] .bar-bot {
+  transform: translateY(-5px) rotate(-45deg);
+}
+html,
+body {
+  overflow-x: hidden;
+}
+html {
+  scrollbar-gutter: stable;
+}
+.mobile-nav-backdrop,
+.mobile-nav-drawer {
+  display: none;
+}
+body.nav-drawer-open {
+  overflow: hidden !important;
+}
+@media (max-width: 849px) {
+  .desktop-nav {
+    display: none;
+  }
+  .btn-hamburger {
+    display: inline-flex;
+  }
+  .mobile-nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 990;
+    background: oklch(0 0 0 / 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 280ms cubic-bezier(0.16, 1, 0.3, 1), visibility 280ms ease;
+  }
+  .mobile-nav-backdrop.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .mobile-nav-drawer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100dvh;
+    max-height: 100dvh;
+    width: min(320px, 85vw);
+    z-index: 1000;
+    background: var(--bg-surface-1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid var(--border-strong);
+    box-shadow: -8px 0 32px oklch(0 0 0 / 0.35);
+    transform: translate3d(100%, 0, 0);
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), visibility 300ms ease;
+    will-change: transform;
+  }
+  .mobile-nav-drawer.is-active {
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .mobile-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+  }
+  .mobile-drawer-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+  .mobile-drawer-brand-title {
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+  .btn-drawer-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius-outer-sm);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface-2);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition:
+      background-color 150ms ease,
+      color 150ms ease,
+      border-color 150ms ease;
+  }
+  .btn-drawer-close:hover {
+    background: var(--bg-surface-3);
+    border-color: var(--border-strong);
+    color: var(--text-primary);
+  }
+  .btn-drawer-close:focus-visible {
+    outline: 2px solid var(--accent-amber);
+    outline-offset: 2px;
+  }
+  .mobile-nav {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding: var(--space-md) var(--space-lg);
+    -webkit-overflow-scrolling: touch;
+  }
+  .mobile-nav-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: var(--space-xs);
+    margin: 0;
+    padding: 0;
+  }
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-outer-sm);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    border: 1px solid transparent;
+    background: transparent;
+    transition:
+      background-color 150ms ease,
+      color 150ms ease,
+      border-color 150ms ease,
+      transform 150ms ease;
+  }
+  .mobile-nav-link:hover,
+  .mobile-nav-link:focus-visible {
+    background: var(--bg-surface-2);
+    color: var(--accent-amber);
+    border-color: var(--border-subtle);
+    transform: translateX(4px);
+  }
+  .mobile-drawer-footer {
+    padding: var(--space-md) var(--space-lg);
+    border-top: 1px solid var(--border-subtle);
+    background: var(--bg-surface-2);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .drawer-browser-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .drawer-browser-section {
+    position: relative;
+  }
+  .drawer-browser-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.35rem;
+  }
+  .drawer-footer-heading {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: var(--text-muted, #94a3b8);
+  }
+  .drawer-grid-overlay {
+    position: static;
+    pointer-events: none;
+  }
+  .drawer-browser-section:not(:has(.is-coming-soon)) .drawer-grid-overlay {
+    display: none !important;
+  }
+  .drawer-browser-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
+  }
+  .btn-drawer-browser {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.5rem 0.2rem;
+    border-radius: var(--radius-outer-sm);
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-surface-1);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.72rem;
+    font-weight: 600;
+    transition: all 150ms ease;
+  }
+  .btn-drawer-browser .btn-coming-soon-tag {
+    font-size: 0.55rem;
+    padding: 1px 4px;
+    border-radius: 4px;
+    line-height: 1;
+    margin-top: 1px;
+  }
+  .btn-drawer-browser:not(.is-coming-soon) .btn-coming-soon-tag {
+    display: none !important;
+  }
+  .btn-drawer-browser:hover {
+    background: var(--bg-surface-3);
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+  }
+  .btn-drawer-browser.is-coming-soon:hover {
+    filter: grayscale(1) opacity(0.55);
+    background: var(--bg-surface-2) !important;
+    border-color: var(--border-subtle) !important;
+    color: var(--text-muted, #94a3b8) !important;
+    transform: none !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+  }
+  .btn-drawer-browser.is-coming-soon:hover .drawer-browser-icon {
+    color: var(--text-muted, #94a3b8) !important;
+  }
+  .btn-drawer-browser.is-coming-soon:hover .btn-coming-soon-tag {
+    background: rgba(148, 163, 184, 0.12) !important;
+    border-color: rgba(148, 163, 184, 0.25) !important;
+    color: var(--text-muted, #94a3b8) !important;
+  }
+  .btn-drawer-safari .drawer-browser-icon {
+    color: #38bdf8;
+  }
+  .btn-drawer-chrome .drawer-browser-icon {
+    color: #4ade80;
+  }
+  .btn-drawer-firefox .drawer-browser-icon {
+    color: #fb923c;
+  }
+  .drawer-footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .btn-drawer-github {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    flex: 1;
+    min-height: 42px;
+    padding: 0.1rem 0.5rem;
+    border-radius: var(--radius-outer-sm);
+    border: 1px solid var(--border-strong);
+    background: var(--bg-surface-1);
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 150ms ease, border-color 150ms ease;
+  }
+  .btn-drawer-github:hover {
+    background: var(--bg-surface-3);
+    border-color: var(--accent-amber);
+  }
+  .btn-drawer-icon-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: var(--radius-outer-sm);
+    border: 1px solid var(--border-strong);
+    background: var(--bg-surface-1);
+    text-decoration: none;
+    transition: all 150ms ease;
+  }
+  .btn-drawer-feature {
+    color: #38bdf8;
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+  .btn-drawer-feature:hover {
+    background: rgba(56, 189, 248, 0.12);
+    border-color: #38bdf8;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+    transform: translateY(-1px);
+  }
+  .btn-drawer-issue {
+    color: #fb7185;
+    svg {
+      width: 2rem;
+      height: 1.75rem;
+    }
+  }
+  .btn-drawer-issue:hover {
+    background: rgba(251, 113, 133, 0.12);
+    border-color: #fb7185;
+    box-shadow: 0 0 12px rgba(251, 113, 133, 0.3);
+    transform: translateY(-1px);
+  }
+}
+@media (max-width: 480px) {
+  .header-inner {
+    gap: var(--space-xs);
+  }
+  .btn-github .btn-github-text {
+    display: none;
+  }
+  .btn-github {
+    padding: 0.45rem 0.55rem;
+  }
+  .brand-anchor {
+    font-size: var(--text-sm);
+  }
+}
+
+/* src/landing/sections/Hero/hero.styles.css */
+.hero-section {
+  padding-block: var(--space-xl) var(--space-2xl);
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  overflow: hidden;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+  gap: var(--space-2xl);
+  align-items: center;
+  width: 100%;
+}
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 80ch;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  background-color: var(--bg-canvas-seethrough);
+  padding: 1em;
+  border-radius: var(--radius-outer-lg);
+}
+[data-theme=light] .hero-content {
+  background-color: oklch(100% 0.00011 271.152 / 0.4);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4.5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.hero-title-accent {
+  color: var(--accent-amber);
+  font-style: italic;
+  font-weight: 600;
+}
+.hero-thesis {
+  font-size: var(--text-md);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-xs);
+  max-width: 100%;
+}
+.btn-hero-download {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 120ms ease;
+}
+.btn-hero-download:hover {
+  border-color: var(--accent-amber);
+  color: var(--accent-amber);
+  transform: translateY(-1px);
+}
+.btn-hero-download:active {
+  transform: translateY(0);
+}
+.hero-metrics-pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-subtle);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  .spacer {
+    display: inline-flex;
+    position: relative;
+    height: var(--space-sm);
+    width: var(--space-sm);
+    background-color: var(--accent-amber);
+    flex-shrink: 0;
+  }
+}
+.metric-pill {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: 100%;
+}
+.metric-value {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--accent-cyan);
+  white-space: nowrap;
+}
+.metric-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: var(--space-lg);
+  }
+}
+@media (max-width: 680px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+  }
+  .hero-content {
+    padding: 0.85em;
+  }
+  .hero-thesis {
+    font-size: clamp(0.95rem, 2.8vw, 1.15rem);
+  }
+  .hero-metrics-pill-group {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-sm) var(--space-md);
+  }
+  .hero-metrics-pill-group .spacer {
+    display: none;
+  }
+  .metric-label {
+    font-size: 0.72rem;
+    line-height: 1.3;
+  }
+  .metric-value {
+    font-size: 1.1rem;
+  }
+}
+@media (max-width: 360px) {
+  .hero-metrics-pill-group {
+    grid-template-columns: 1fr;
+  }
+}
+.hero-deck-column {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+.carousel-shards-backdrop {
+  --carousel-shards-parallax-step: 15%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140%;
+  min-width: 140%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
+  user-select: none;
+  will-change: transform;
+  transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.carousel-shards-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  overflow: visible;
+  opacity: 0.35;
+  will-change: transform;
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1), opacity 350ms ease;
+}
+[data-theme=light] .carousel-shards-svg {
+  opacity: 0.22;
+}
+.carousel-shards-hd {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+.carousel-shards-hd.is-loaded {
+  opacity: 0.35;
+}
+[data-theme=light] .carousel-shards-hd.is-loaded {
+  opacity: 0.22;
+}
+.has-hd-loaded .carousel-shards-skeleton {
+  opacity: 0;
+}
+.carousel-shards-svg .shard-path,
+.carousel-shards-svg path {
+  transition: fill 350ms cubic-bezier(0.16, 1, 0.3, 1), opacity 350ms ease;
+}
+.carousel-shards-svg .shard-path-1,
+.carousel-shards-svg path:nth-of-type(1) {
+  fill: var(--border-subtle);
+  opacity: 0.55;
+}
+.carousel-shards-svg .shard-path-2,
+.carousel-shards-svg path:nth-of-type(2) {
+  fill: var(--border-strong);
+  opacity: 0.7;
+}
+.carousel-shards-svg .shard-path-3,
+.carousel-shards-svg path:nth-of-type(3) {
+  fill: var(--accent-amber-subtle);
+  opacity: 0.85;
+}
+.carousel-shards-svg .shard-path-4,
+.carousel-shards-svg path:nth-of-type(4) {
+  fill: var(--accent-amber);
+  opacity: 0.95;
+}
+[data-theme=light] .carousel-shards-svg .shard-path-1,
+[data-theme=light] .carousel-shards-svg path:nth-of-type(1) {
+  fill: var(--border-subtle);
+  opacity: 0.4;
+}
+[data-theme=light] .carousel-shards-svg .shard-path-2,
+[data-theme=light] .carousel-shards-svg path:nth-of-type(2) {
+  fill: var(--border-strong);
+  opacity: 0.6;
+}
+[data-theme=light] .carousel-shards-svg .shard-path-3,
+[data-theme=light] .carousel-shards-svg path:nth-of-type(3) {
+  fill: var(--accent-amber-subtle);
+  opacity: 0.75;
+}
+[data-theme=light] .carousel-shards-svg .shard-path-4,
+[data-theme=light] .carousel-shards-svg path:nth-of-type(4) {
+  fill: var(--accent-amber);
+  opacity: 0.9;
+}
+.hero-carousel-container {
+  cursor: grab;
+  --carousel-gap: 2rem;
+  width: 100%;
+  max-width: 28rem;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.carousel-viewport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-outer-md);
+  padding: 4px;
+  box-sizing: border-box;
+  margin: -4px;
+}
+.carousel-track {
+  display: flex;
+  gap: var(--carousel-gap);
+  width: 100%;
+  min-height: 100%;
+  transform: translate3d(var(--carousel-track-offset, 0px), 0, 0);
+  transition: transform 480ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.carousel-panel {
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  opacity: 0.4;
+  transition: opacity 0.4s ease;
+}
+.carousel-panel.is-active {
+  opacity: 1;
+}
+.carousel-card {
+  position: relative;
+  padding: var(--space-md);
+  height: 55dvh;
+  max-height: 45ch;
+  width: 100%;
+  box-sizing: border-box;
+}
+.stacked-card-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: 1;
+}
+.stacked-card-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.25;
+}
+.stacked-card-badge {
+  position: absolute;
+  bottom: -1.25rem;
+  order: -1;
+  align-self: flex-start;
+  z-index: 2;
+}
+.stacked-card-graphic {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--bg-surface-2);
+  border-radius: max(0rem, calc(var(--radius-outer-lg) - var(--space-lg)));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+  border: 1px solid var(--border-subtle);
+}
+.stacked-card-graphic svg {
+  width: 100%;
+  height: 100%;
+}
+.stacked-card-graphic .stage-placeholder-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.18;
+  z-index: 0;
+}
+.stacked-card-graphic .image-hd {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.35s ease-out;
+  position: relative;
+  z-index: 1;
+}
+.stacked-card-graphic .image-hd.is-loaded {
+  opacity: 1;
+}
+.stacked-card-caption {
+  font-size: minmax(1rem, var(--text-md));
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+.stacked-deck-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--space-xs);
+}
+.stack-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+.stack-crumb {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--border-strong);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    width 220ms ease,
+    background 220ms ease,
+    box-shadow 220ms ease;
+}
+.stack-crumb:hover {
+  background: var(--text-muted);
+}
+.stack-crumb.is-active {
+  width: 24px;
+  background: var(--accent-amber);
+  box-shadow: 0 0 8px oklch(0.74 0.16 55 / 0.3);
+}
+.stack-deck-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+.btn-deck-cycle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+  padding: 0;
+}
+.btn-deck-cycle:hover {
+  background: var(--bg-surface-2);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+.btn-deck-cycle:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+/* src/landing/styles/critical.css */
+.mobile-nav-backdrop:not(.is-active) {
+  display: none !important;
+}
+.mobile-nav-drawer:not(.is-active) {
+  display: none !important;
+}
+.skip-link:not(:focus) {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+}
+.desktop-nav .primary-nav-list {
+  list-style: none !important;
+  display: flex !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  align-items: center !important;
+}
+html {
+  background-color: var(--bg-canvas, #0c0e14);
+}
+body:not(.page-ready) {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+body.page-ready {
+  opacity: 1;
+  transition: opacity 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  body.page-ready {
+    transition: none !important;
+  }
+}
+
+    </style>
+    <noscript>
+      <style>
+        body:not(.page-ready) {
+          opacity: 1 !important;
+          pointer-events: auto !important;
+        }
+      </style>
+    </noscript>
+    <script>
+      (function () {
+        try {
+          var storage = (typeof window !== 'undefined' && 'localStorage' in window) ? window.localStorage : null;
+          var saved = storage ? storage.getItem('paraflow_theme') : null;
+          if (saved === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            var cs = document.querySelector('meta[name="color-scheme"]');
+            if (cs) cs.content = 'light';
+          }
+          var savedMotion = storage ? storage.getItem('paraflow_motion') : null;
+          if (savedMotion === 'disabled' || (!savedMotion && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+            document.documentElement.setAttribute('data-reduce-motion', 'true');
+          }
+        } catch (e) {}
+        function activate() {
+          if (document.body) {
+            if (!document.body.classList.contains('page-ready')) {
+              document.body.classList.add('page-ready');
+            }
+          } else {
+            document.addEventListener('DOMContentLoaded', activate);
+          }
+        }
+        function schedule(fn) {
+          if (typeof requestAnimationFrame === 'function') {
+            requestAnimationFrame(fn);
+          } else {
+            setTimeout(fn, 16);
+          }
+        }
+        var timer = setTimeout(activate, 300);
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(function () {
+            clearTimeout(timer);
+            schedule(activate);
+          }).catch(function () {
+            clearTimeout(timer);
+            activate();
+          });
+        } else if (document.readyState === 'interactive' || document.readyState === 'complete') {
+          clearTimeout(timer);
+          activate();
+        } else {
+          document.addEventListener('DOMContentLoaded', function () {
+            clearTimeout(timer);
+            schedule(activate);
+          });
+        }
+      })();
+    </script>
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://github.com/ParaFlow-Speed-Reader/Paraflow-Landing#software",
+        "name": "ParaFlow Reader",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Mozilla Firefox, Any Modern Browser",
+        "description": "Secure sliding-window speed reading engine preserving parafoveal preview context and optical recognition point alignment.",
+        "sameAs": [
+          "https://www.wikidata.org/wiki/Q11261",
+          "https://www.wikidata.org/wiki/Q188451"
+        ],
+        "featureList": [
+          "Reading context preservation with gamified memory enhancement",
+          "Optical Recognition Point (ORP) focal targeting",
+          "Context aware dynamic timing cadence",
+          "Tactile acceleration and visual velocity simulator",
+          "Local-first zero-snooping architecture"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://paraflow.app/#website",
+        "name": "ParaFlow Engine",
+        "url": "https://paraflow.app/",
+        "about": {
+          "@id": "https://www.wikidata.org/wiki/Q11261"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link" data-i18n="skipLink">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#top" class="brand-anchor" data-i18n-aria="brandAriaLabel" aria-label="ParaFlow Reader Home">
+                <span class="brand-icon-skeleton" aria-hidden="true"><span class="brand-skeleton-disc"></span><svg class="brand-skeleton-reticle" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28" aria-hidden="true"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2" stroke-dasharray="6 2" opacity="0.4"/><circle cx="16" cy="16" r="5" fill="currentColor" opacity="0.4"/><line x1="2" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.25"/><line x1="16" y1="2" x2="16" y2="30" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.25"/></svg><img data-hd-asset="favicon.svg" class="brand-icon-hd" alt="" width="28" height="28" decoding="async" /></span>
+                <span data-i18n="extensionName">ParaFlow Reader</span>
+                <span class="ext-tagline" data-i18n="tagline">Cognitive/Comprehension Reading Engine</span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Primary Navigation">
+                <ul class="primary-nav-list">
+                    <li><a href="#mission" class="nav-link" data-i18n="navMindset">Mindset</a></li>
+                    <li><a href="#cognitive-science" class="nav-link" data-i18n="navCognitiveScience">Research</a></li>
+                    <li><a href="#demo" class="nav-link" data-i18n="navDemo">Demo</a></li>
+                    <li><a href="#practice" class="nav-link" data-i18n="navPractice">Mastery</a></li>
+                    <li><a href="#ergonomics" class="nav-link" data-i18n="navErgonomics">Ergonomics</a></li>
+                    <li><a href="#download" class="nav-link" data-i18n="navDownload">Download</a></li>
+                    <li><a href="#taxonomy" class="nav-link" data-i18n="navTaxonomy">Taxonomy</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="#download" class="btn-header-download" aria-label="Download Extension">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    <span data-i18n="navDownload">Download</span>
+                </a>
+                <button type="button" class="btn-theme-toggle" id="theme-toggle"
+                    data-i18n-aria="themeToggleAria"
+                    aria-label="Toggle Light and Dark visual theme">
+                    <svg id="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:middle;" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                </button>
+                <a href="https://github.com/ParaFlow-Speed-Reader/Paraflow-Landing" class="btn-github" target="_blank" rel="noopener noreferrer">
+                    <span class="btn-github-text" data-i18n="sourceLink">Source</span>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;vertical-align:middle;" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+                <button type="button" class="btn-hamburger" id="nav-hamburger"
+                    aria-expanded="false"
+                    aria-controls="mobile-nav-drawer"
+                    aria-label="Toggle navigation menu"
+                    data-i18n-aria="menuToggleAria">
+                    <span class="hamburger-box">
+                        <span class="hamburger-bar bar-top"></span>
+                        <span class="hamburger-bar bar-mid"></span>
+                        <span class="hamburger-bar bar-bot"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-nav-backdrop" id="mobile-nav-backdrop" aria-hidden="true"></div>
+    <aside class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile Navigation" aria-hidden="true">
+        <div class="mobile-drawer-header">
+            <div class="mobile-drawer-brand">
+                <span class="brand-icon-skeleton" aria-hidden="true"><span class="brand-skeleton-disc"></span><svg class="brand-skeleton-reticle" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28" aria-hidden="true"><circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2" stroke-dasharray="6 2" opacity="0.4"/><circle cx="16" cy="16" r="5" fill="currentColor" opacity="0.4"/><line x1="2" y1="16" x2="30" y2="16" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.25"/><line x1="16" y1="2" x2="16" y2="30" stroke="currentColor" stroke-width="1.5" stroke-opacity="0.25"/></svg><img data-hd-asset="favicon.svg" class="brand-icon-hd" alt="" width="28" height="28" decoding="async" /></span>
+                <span class="mobile-drawer-brand-title" data-i18n="extensionName">ParaFlow Reader</span>
+            </div>
+            <button type="button" class="btn-drawer-close" id="nav-drawer-close"
+                aria-label="Close navigation menu"
+                data-i18n-aria="closeMenuAria">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+
+        <nav class="mobile-nav" aria-label="Mobile Navigation Links">
+            <ul class="mobile-nav-list">
+                <li><a href="#mission" class="mobile-nav-link" data-i18n="navMindset">Mindset</a></li>
+                <li><a href="#cognitive-science" class="mobile-nav-link" data-i18n="navCognitiveScience">Research</a></li>
+                <li><a href="#demo" class="mobile-nav-link" data-i18n="navDemo">Demo</a></li>
+                <li><a href="#practice" class="mobile-nav-link" data-i18n="navPractice">Mastery</a></li>
+                <li><a href="#ergonomics" class="mobile-nav-link" data-i18n="navErgonomics">Ergonomics</a></li>
+                <li><a href="#download" class="mobile-nav-link" data-i18n="navDownload">Download</a></li>
+                <li><a href="#taxonomy" class="mobile-nav-link" data-i18n="navTaxonomy">Taxonomy</a></li>
+            </ul>
+        </nav>
+
+        <div class="mobile-drawer-footer">
+            <div class="drawer-browser-section">
+                <div class="drawer-browser-header">
+                    <span class="drawer-footer-heading" data-i18n="drawerBrowserHeading">Get the Extension</span>
+                    <!-- Temporary non-covering overlay noting Coming Soon -->
+                    <div class="coming-soon-overlay drawer-grid-overlay" aria-hidden="true">
+                        <span class="coming-soon-pill">
+                            <span class="coming-soon-pulse" aria-hidden="true"></span>
+                            <span class="coming-soon-text" data-i18n="comingSoon">Coming Soon</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="drawer-browser-grid">
+                    <!-- Toggle off Coming Soon for an individual button by removing 'is-coming-soon' -->
+                    <a href="https://apps.apple.com/safari" class="btn-drawer-browser btn-drawer-safari is-coming-soon" data-coming-soon="true" target="_blank" rel="noopener noreferrer" aria-label="Download for Safari (Coming Soon)" title="Download for Safari (Coming Soon)">
+                        <span class="drawer-browser-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:middle;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" stroke="none"/></svg></span>
+                        <span class="drawer-browser-label">Safari</span>
+                        <span class="btn-coming-soon-tag" aria-hidden="true" data-i18n="comingSoon">Soon</span>
+                    </a>
+                    <!-- Toggle off Coming Soon for an individual button by removing 'is-coming-soon' -->
+                    <a href="https://chromewebstore.google.com" class="btn-drawer-browser btn-drawer-chrome is-coming-soon" data-coming-soon="true" target="_blank" rel="noopener noreferrer" aria-label="Download for Chrome (Coming Soon)" title="Download for Chrome (Coming Soon)">
+                        <span class="drawer-browser-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:middle;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg></span>
+                        <span class="drawer-browser-label">Chrome</span>
+                        <span class="btn-coming-soon-tag" aria-hidden="true" data-i18n="comingSoon">Soon</span>
+                    </a>
+                    <!-- Toggle off Coming Soon for an individual button by removing 'is-coming-soon' -->
+                    <a href="https://addons.mozilla.org" class="btn-drawer-browser btn-drawer-firefox is-coming-soon" data-coming-soon="true" target="_blank" rel="noopener noreferrer" aria-label="Download for Firefox (Coming Soon)" title="Download for Firefox (Coming Soon)">
+                        <span class="drawer-browser-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:middle;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 7.07 17.07A10 10 0 0 1 12 22a10 10 0 0 1-7.07-2.93A10 10 0 0 1 12 2z"/><path d="M12 6a6 6 0 0 1 6 6c0 3.31-2.69 6-6 6a6 6 0 0 1-6-6c0-1.66.67-3.16 1.76-4.24"/></svg></span>
+                        <span class="drawer-browser-label">Firefox</span>
+                        <span class="btn-coming-soon-tag" aria-hidden="true" data-i18n="comingSoon">Soon</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="drawer-footer-actions">
+                <a href="https://github.com/ParaFlow-Speed-Reader/Paraflow-Landing" class="btn-drawer-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;vertical-align:middle;" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://github.com/ParaFlow-Speed-Reader/Paraflow-Landing/discussions" class="btn-drawer-icon-action btn-drawer-feature" target="_blank" rel="noopener noreferrer" aria-label="Feature Idea" title="Feature Idea">
+                    <svg width="22" height="22" viewBox="0 0 17.04 24" fill="currentColor" style="flex-shrink:0;vertical-align:middle;" aria-hidden="true"><path d="M6.758 10.68c-2.634-.0356-5.167 1.741-6.026 4.232-.8518 2.314-.2217 5.081 1.564 6.785 1.981 1.98 5.302 2.37 7.699.9314 1.948-1.11 3.163-3.304 3.177-5.534.1157-2.391-1.276-4.823-3.494-5.786-.9142-.4122-1.917-.6231-2.919-.6281zm2.819 3.475c.7931-.0437 1.348.9658.8721 1.607-.4144.692-1.562.5797-1.84-.1753-.2925-.6597.2475-1.455.9677-1.432zm-5.623 0c.7931-.0437 1.348.9658.8721 1.607-.4144.692-1.562.5797-1.84-.1753-.2925-.6597.2475-1.455.9677-1.432zm7.055 3.804c-.2457 2.057-2.172 3.732-4.244 3.684-2.106.0502-4.081-1.693-4.247-3.799.0423-.497.5867-.4845.9603-.4666 2.374.0071 4.749-.0143 7.122.0107.257.0467.4527.3104.4079.571z"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width=".9743" d="M6.722.9935v.4871m3.444.9402-.3459.3459m-6.542-.3459.3459.3459m5.534 3.098c.0836-1.854-2.258-3.12-3.763-2.035-1.327.7976-1.409 2.698-.4054 3.775.3264.4987.2687 1.104.2719 1.67.0037.5005.5274.5038.8878.4871.5475-.0058 1.096.0119 1.643-.0094.3655-.0595.4182-.4516.3921-.7532-.0257-.6234.0784-1.276.5331-1.746a2.404 2.404 0 0 0 .4412-1.389z"/><path d="M16.68 11.94h-1.915v1.915h-1.618V11.94h-1.915v-1.636h1.915V8.407h1.618v1.897h1.915z"/></svg>
+                </a>
+                <a href="https://github.com/ParaFlow-Speed-Reader/Paraflow-Landing/issues" class="btn-drawer-icon-action btn-drawer-issue" target="_blank" rel="noopener noreferrer" aria-label="Report Issue" title="Report Issue">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M11.99 2.633c-7.546-.2818-12.35 7.422-8.564 13.97.2868 1.109-.5666 2.397-.9659 3.477.8086 1.914 3.016-.3417 4.25-.1288 1.545.9015 3.348 1.417 5.151 1.417 14.37.7232 12.29-19.53.1288-18.74z"/><path fill="#fff" d="M13.37 5.907c.1291 1.536.3103 6.211-.3981 7.901s-1.128 1.642-1.784-.0188-.7349-6.52-.464-7.882 2.517-1.536 2.646 0zm-1.369 12.95c-1.75.1135-2.075-2.03-.947-2.533.6591-.2354 1.474-.2465 2.089.1046 1.006 1.082.3021 2.449-1.142 2.428z"/></svg>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <main id="main-content">
+        <section class="hero-section" id="top">
+            <!-- Panoramic Background Shards (Full Section Height Fit, Left Margin/Offset Bleed) -->
+            <div class="carousel-shards-backdrop" id="carousel-shards-backdrop" aria-hidden="true">
+                <svg class="carousel-shards-svg carousel-shards-skeleton" viewBox="0 0 800 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <style>
+          :root {
+            --shard-color-1: oklch(0.26 0.02 250);
+            --shard-color-2: oklch(0.36 0.03 250);
+            --shard-color-3: oklch(0.45 0.08 55);
+            --shard-color-4: oklch(0.74 0.16 55);
+          }
+          @media (prefers-color-scheme: light) {
+            :root {
+              --shard-color-1: oklch(0.82 0.015 80);
+              --shard-color-2: oklch(0.68 0.025 80);
+              --shard-color-3: oklch(0.80 0.08 55);
+              --shard-color-4: oklch(0.58 0.16 55);
+            }
+          }
+          .shard-path-1 { fill: var(--shard-color-1, #262a36); opacity: 0.5; }
+          .shard-path-2 { fill: var(--shard-color-2, #3d4354); opacity: 0.7; }
+          .shard-path-3 { fill: var(--shard-color-3, #7a5026); opacity: 0.85; }
+          .shard-path-4 { fill: var(--shard-color-4, #e59a35); opacity: 0.95; }
+        </style>
+        <linearGradient id="shards-shimmer" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="var(--shard-color-1, #262a36)" stop-opacity="0.4">
+            <animate attributeName="offset" values="-1; 1" dur="2.4s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="50%" stop-color="var(--shard-color-4, #e59a35)" stop-opacity="0.25">
+            <animate attributeName="offset" values="-0.5; 1.5" dur="2.4s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="100%" stop-color="var(--shard-color-1, #262a36)" stop-opacity="0.4">
+            <animate attributeName="offset" values="0; 2" dur="2.4s" repeatCount="indefinite" />
+          </stop>
+        </linearGradient>
+      </defs>
+      <g stroke-width="0.5">
+        <path class="shard-path shard-path-1" d="M0,200 L0,65 L140,25 L320,115 L500,45 L680,125 L800,55 L800,200 Z M180,45 L340,140 L520,35 L680,115 L800,75 L800,200 L0,200 Z" fill="url(#shards-shimmer)" />
+        <path class="shard-path shard-path-2" d="M0,200 L60,110 L240,55 L400,135 L560,65 L720,145 L800,95 L800,200 Z M190,195 L330,85 L490,155 L650,75 L800,165 L800,200 Z" />
+        <path class="shard-path shard-path-3" d="M40,200 L160,125 L300,175 L460,95 L620,165 L760,105 L800,135 L800,200 Z M220,200 L360,135 L500,185 L640,115 L780,175 L800,190 Z" />
+        <path class="shard-path shard-path-4" d="M90,200 L220,140 L340,185 L480,120 L600,175 L730,125 L800,155 L800,200 Z M310,200 L430,145 L550,190 L670,135 L800,175 Z" />
+      </g>
+    </svg>
+    <img data-hd-asset="static/svg/long-aspect-background-shards.svg" class="carousel-shards-hd" alt="" decoding="async" />
+            </div>
+
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span data-i18n="heroTitleMain">Read at the speed of thought with </span><span class="hero-title-accent" data-i18n="heroTitleAccent">natural visual flow</span>.
+                    </h1>
+                    <p class="hero-thesis" data-i18n="heroThesis">
+                        ParaFlow Reader elevates your reading experience.  Letter-cueing and the ORP | Optical Recognition Point, is only half the speed-reading experience.  Check that out! (👉ﾟヮﾟ)👉 500+ WPM with deep, uncompromised comprehension is not far out of reach.
+                    </p>
+                    <div class="hero-cta-group">
+                        <a href="#demo" class="btn-primary">
+                            <span data-i18n="heroCtaDemo">Test Interactive Simulator</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" aria-hidden="true">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                        <a href="#download" class="btn-secondary btn-hero-download">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            <span data-i18n="heroCtaDownload">Download</span>
+                        </a>
+                        <a href="#cognitive-science" class="btn-secondary">
+                            <span data-i18n="heroCtaScience">Explore Research</span>
+                        </a>
+                    </div>
+                    <div class="hero-metrics-pill-group">
+                        <div class="metric-pill">
+                            <span class="metric-value" data-i18n="metricWpmValue">50–1200</span>
+                            <span class="metric-label" data-i18n="metricWpmLabel">Calibrated WPM Range</span>
+                        </div>
+                        <div class="spacer"></div>
+                        <div class="metric-pill">
+                            <span class="metric-value" data-i18n="metricSaccadeValue">Less Rereading</span>
+                            <span class="metric-label" data-i18n="metricSaccadeLabel">No Playing Catch-up</span>
+                        </div>
+                        <div class="spacer"></div>
+                        <div class="metric-pill">
+                            <span class="metric-value" data-i18n="metricMemoryValue">More Remembered</span>
+                            <span class="metric-label" data-i18n="metricMemoryLabel">Increase Processing Memory</span>
+                        </div>
+                        <div class="spacer"></div>
+                        <div class="metric-pill">
+                            <span class="metric-value" data-i18n="metricFocalValue">More Retension</span>
+                            <span class="metric-label" data-i18n="metricFocalLabel">Less Wasted Time</span>
+                        </div>
+                        <div class="spacer"></div>
+                        <div class="metric-pill">
+                            <span class="metric-value" data-i18n="metricStorageValue">Offline 1st</span>
+                            <span class="metric-label" data-i18n="metricStorageLabel">Your privacy, your control.</span>
+                        </div>
+                        <div class="spacer"></div>
+                        <div class="metric-pill">
+                            <span class="metric-value" data-i18n="metricGamifiedValue">Have fun</span>
+                            <span class="metric-label" data-i18n="metricGamifiedLabel">Gamified / Opt-IN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Above-the-Fold Panoramic Speed Carousel with Background Shards (Law 1.1, Law 2.3) -->
+                <div class="hero-deck-column">
+                    <div class="hero-carousel-container" id="hero-carousel" aria-roledescription="carousel" aria-label="ParaFlow Architectural Capabilities">
+                        <!-- Framed Viewport -->
+                        <div class="carousel-viewport" id="carousel-viewport">
+                            <div class="carousel-track" id="carousel-track">
+                                <!-- View-Panel 1: Parafoveal Flow (Active) -->
+                                <div class="carousel-panel is-active" id="slide-parafoveal" role="group" aria-roledescription="slide" aria-label="1 of 4: Parafoveal Flow">
+                                    <article class="stacked-card carousel-card is-card-active" id="panel-parafoveal" tabindex="0">
+                                        <div class="stacked-card-header">
+                                             <span class="stacked-card-title" data-i18n="cardParafovealTitle">Parafoveal Vision Horizon</span>
+                                            <span class="stacked-card-badge badge-cyan" data-i18n="cardParafovealBadge">Context Preservation</span>
+                                        </div>
+                                        <div class="stacked-card-graphic">
+                                            <svg viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+                                                aria-label="Ocular span diagram illustrating parafoveal preview lookahead">
+                                                <line x1="40" y1="110" x2="360" y2="110" stroke="var(--border-subtle)" stroke-dasharray="4 4" />
+                                                <line x1="200" y1="15" x2="200" y2="205" stroke="var(--border-subtle)" stroke-dasharray="4 4" />
+                                                <ellipse cx="200" cy="110" rx="160" ry="78" fill="oklch(0.24 0.04 210 / 0.15)" stroke="var(--accent-cyan)" stroke-width="1.5" stroke-dasharray="3 3" />
+                                                <text x="50" y="50" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="10" data-i18n="diagramPeripheralLabel">Peripheral Field (&gt;5°)</text>
+                                                <ellipse cx="200" cy="110" rx="100" ry="50" fill="oklch(0.74 0.16 55 / 0.18)" stroke="var(--accent-amber)" stroke-width="2" />
+                                                <text x="110" y="80" fill="var(--accent-amber)" font-family="var(--font-mono)" font-size="11" font-weight="700" data-i18n="diagramParafovealLabel">Parafoveal Preview (2°–5°)</text>
+                                                <circle cx="200" cy="110" r="28" fill="oklch(0.68 0.22 25 / 0.35)" stroke="var(--accent-reticle)" stroke-width="2.5" />
+                                                <circle cx="200" cy="110" r="4" fill="var(--accent-reticle)" />
+                                                <text x="182" y="105" fill="var(--text-primary)" font-family="var(--font-mono)" font-size="11" font-weight="700" data-i18n="diagramOrpLabel">ORP</text>
+                                                <text x="180" y="128" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9" data-i18n="diagramFovealAngle">1°–2°</text>
+                                                <line x1="200" y1="92" x2="200" y2="100" stroke="var(--accent-reticle)" stroke-width="2" />
+                                                <line x1="200" y1="120" x2="200" y2="128" stroke="var(--accent-reticle)" stroke-width="2" />
+                                            </svg>
+                                        </div>
+                                        <p class="stacked-card-caption" data-i18n="cardParafovealCaption">
+                                            Preserves 6 to 8 characters of parafoveal lookahead alongside preceding ghost line context, keeping sentence syntax clear in working memory.
+                                        </p>
+                                    </article>
+                                </div>
+
+                                <!-- View-Panel 2: Optical Recognition Point Reticle -->
+                                <div class="carousel-panel" id="slide-reticle" role="group" aria-roledescription="slide" aria-label="2 of 4: ORP Reticle">
+                                    <article class="stacked-card carousel-card" id="panel-reticle" tabindex="-1">
+                                        <div class="stacked-card-header">
+                                            <span class="stacked-card-title" data-i18n="cardReticleTitle">Optical Recognition Point Reticle</span>
+                                            <span class="stacked-card-badge badge-amber" data-i18n="cardReticleBadge">Focal Targeting</span>
+                                        </div>
+                                        <div class="stacked-card-graphic">
+                                            <svg viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+                                                aria-label="ORP precision reticle alignment diagram">
+                                                <rect x="30" y="45" width="340" height="130" rx="10" fill="var(--bg-surface-1)" stroke="var(--border-subtle)" />
+                                                <line x1="200" y1="20" x2="200" y2="55" stroke="var(--accent-reticle)" stroke-width="3" stroke-linecap="round" />
+                                                <line x1="200" y1="165" x2="200" y2="200" stroke="var(--accent-reticle)" stroke-width="3" stroke-linecap="round" />
+                                                <polygon points="196,55 204,55 200,63" fill="var(--accent-reticle)" />
+                                                <polygon points="196,165 204,165 200,157" fill="var(--accent-reticle)" />
+                                                <text x="130" y="118" fill="var(--text-secondary)" font-family="var(--font-mono)" font-size="28" font-weight="700">Rec</text>
+                                                <text x="187" y="118" fill="var(--accent-reticle)" font-family="var(--font-mono)" font-size="28" font-weight="700" text-decoration="underline">o</text>
+                                                <text x="207" y="118" fill="var(--text-primary)" font-family="var(--font-mono)" font-size="28" font-weight="700">gnition</text>
+                                                <line x1="60" y1="145" x2="340" y2="145" stroke="var(--border-subtle)" stroke-dasharray="3 3" />
+                                                <text x="70" y="160" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="10">Stationary Ocular Center (0° Saccadic Jitter)</text>
+                                            </svg>
+                                        </div>
+                                        <p class="stacked-card-caption" data-i18n="cardReticleCaption">
+                                            Anchors eye fixation directly at the optimal recognition point/character (30–40% into word length), prevent eye fatigue, frustration and eliminating micro-saccades or jumpy eye movements.
+                                        </p>
+                                    </article>
+                                </div>
+
+                                <!-- View-Panel 3: Punctuation-Aware Cadence Clock -->
+                                <div class="carousel-panel" id="slide-cadence" role="group" aria-roledescription="slide" aria-label="3 of 4: Cadence Engine">
+                                    <article class="stacked-card carousel-card" id="panel-cadence" tabindex="-1">
+                                        <div class="stacked-card-header">
+                                            <span class="stacked-card-title" data-i18n="cardCadenceTitle">Punctuation-Aware Cadence</span>
+                                            <span class="stacked-card-badge badge-emerald" data-i18n="cardCadenceBadge">Natural Rhythm</span>
+                                        </div>
+                                        <div class="stacked-card-graphic">
+                                            <svg viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+                                                aria-label="Cadence wave demonstrating punctuation pause scaling">
+                                                <!-- Baseline Flow Track -->
+                                                <rect x="40" y="45" width="60" height="70" rx="6" fill="oklch(0.24 0.04 210 / 0.3)" stroke="var(--accent-cyan)" />
+                                                <text x="50" y="75" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="11" font-weight="700">Word</text>
+                                                <text x="50" y="98" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="10">1.00x</text>
+
+                                                <!-- Comma Break Track -->
+                                                <rect x="120" y="45" width="80" height="70" rx="6" fill="oklch(0.74 0.16 55 / 0.25)" stroke="var(--accent-amber)" />
+                                                <text x="130" y="75" fill="var(--accent-amber)" font-family="var(--font-mono)" font-size="11" font-weight="700">Clause ,</text>
+                                                <text x="130" y="98" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="10">1.35x</text>
+
+                                                <!-- Period Boundary Track -->
+                                                <rect x="220" y="45" width="100" height="70" rx="6" fill="oklch(0.68 0.22 25 / 0.25)" stroke="var(--accent-reticle)" />
+                                                <text x="230" y="75" fill="var(--accent-reticle)" font-family="var(--font-mono)" font-size="11" font-weight="700">Sentence .</text>
+                                                <text x="230" y="98" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="10">1.80x</text>
+
+                                                <!-- Dynamic Waveform Arc -->
+                                                <path d="M40 160 Q100 130 160 160 T280 160 T360 140" fill="none" stroke="var(--accent-emerald)" stroke-width="2.5" stroke-linecap="round" />
+                                                <circle cx="160" cy="160" r="4" fill="var(--accent-emerald)" />
+                                                <circle cx="280" cy="160" r="4" fill="var(--accent-emerald)" />
+                                                <text x="50" y="195" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="10">High-Precision Monotonic Clock Scheduler (0% Layout Thrash)</text>
+                                            </svg>
+                                        </div>
+                                        <p class="stacked-card-caption" data-i18n="cardCadenceCaption">
+                                            The time your eye takes is not the same for every word or symbol.  Paraflow scales the time-spent dynamically across commas (1.35x), periods (1.8x), and paragraphs (2.2x), allowing comprehension to take hold.
+                                        </p>
+                                    </article>
+                                </div>
+
+                                <!-- View-Panel 4: Local-First Sandbox Architecture -->
+                                <div class="carousel-panel" id="slide-sovereignty" role="group" aria-roledescription="slide" aria-label="4 of 4: Local Sovereignty">
+                                    <article class="stacked-card carousel-card" id="panel-sovereignty" tabindex="-1">
+                                        <div class="stacked-card-header">
+                                            <span class="stacked-card-title" data-i18n="cardSovereigntyTitle">Local-First Sandbox Architecture</span>
+                                            <span class="stacked-card-badge badge-purple" data-i18n="cardSovereigntyBadge">Zero Worries</span>
+                                        </div>
+                                        <div class="stacked-card-graphic">
+                                            <svg viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
+                                                aria-label="Local-First Sandbox Architecture diagram illustrating isolated shadow root enclave">
+                                                <!-- Host DOM Boundary (Left) -->
+                                                <rect x="24" y="28" width="112" height="162" rx="8" fill="oklch(0.18 0.02 250 / 0.35)" stroke="var(--border-subtle)" stroke-dasharray="4 4" />
+                                                <text x="34" y="47" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9" font-weight="700">HOST WEBPAGE DOM</text>
+                                                <line x1="34" y1="56" x2="126" y2="56" stroke="var(--border-subtle)" />
+                                                
+                                                <!-- Host untrusted nodes with blocked indicators -->
+                                                <rect x="34" y="65" width="92" height="24" rx="4" fill="oklch(0.22 0.02 250 / 0.4)" stroke="var(--border-subtle)" />
+                                                <text x="42" y="80" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9">&lt;script&gt; host.js</text>
+                                                <circle cx="116" cy="77" r="5" fill="oklch(0.68 0.22 25 / 0.25)" stroke="var(--accent-reticle)" />
+                                                <line x1="113" y1="74" x2="119" y2="80" stroke="var(--accent-reticle)" stroke-width="1.5" />
+                                                <line x1="119" y1="74" x2="113" y2="80" stroke="var(--accent-reticle)" stroke-width="1.5" />
+
+                                                <rect x="34" y="96" width="92" height="24" rx="4" fill="oklch(0.22 0.02 250 / 0.4)" stroke="var(--border-subtle)" />
+                                                <text x="42" y="111" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9">Global document</text>
+                                                <circle cx="116" cy="108" r="5" fill="oklch(0.68 0.22 25 / 0.25)" stroke="var(--accent-reticle)" />
+                                                <line x1="113" y1="105" x2="119" y2="111" stroke="var(--accent-reticle)" stroke-width="1.5" />
+                                                <line x1="119" y1="105" x2="113" y2="111" stroke="var(--accent-reticle)" stroke-width="1.5" />
+
+                                                <rect x="34" y="127" width="92" height="24" rx="4" fill="oklch(0.22 0.02 250 / 0.4)" stroke="var(--border-subtle)" />
+                                                <text x="42" y="142" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9">Network beacon</text>
+                                                <circle cx="116" cy="139" r="5" fill="oklch(0.68 0.22 25 / 0.25)" stroke="var(--accent-reticle)" />
+                                                <line x1="113" y1="136" x2="119" y2="142" stroke="var(--accent-reticle)" stroke-width="1.5" />
+                                                <line x1="119" y1="136" x2="113" y2="142" stroke="var(--accent-reticle)" stroke-width="1.5" />
+
+                                                <text x="34" y="172" fill="var(--accent-reticle)" font-family="var(--font-mono)" font-size="8">AIR-GAP ISOLATED</text>
+
+                                                <!-- Cryptographic Shadow Barrier Arc (Center) -->
+                                                <line x1="148" y1="22" x2="148" y2="198" stroke="oklch(0.7 0.18 300)" stroke-width="2.5" stroke-dasharray="6 3" />
+                                                <!-- Shield Lock Emblem at center barrier -->
+                                                <circle cx="148" cy="110" r="15" fill="oklch(0.18 0.02 250)" stroke="oklch(0.7 0.18 300)" stroke-width="2" />
+                                                <path d="M144 110 V105 A4 4 0 0 1 152 105 V110 M142 110 H154 V117 H142 Z" fill="none" stroke="oklch(0.82 0.16 300)" stroke-width="1.5" />
+
+                                                <!-- Isolated Enclave (Right) -->
+                                                <rect x="160" y="28" width="216" height="162" rx="10" fill="oklch(0.20 0.025 250 / 0.9)" stroke="oklch(0.7 0.18 300 / 0.6)" stroke-width="1.5" />
+                                                <rect x="170" y="38" width="196" height="22" rx="4" fill="oklch(0.7 0.18 300 / 0.15)" stroke="oklch(0.7 0.18 300 / 0.3)" />
+                                                <circle cx="182" cy="49" r="3.5" fill="var(--accent-emerald)" />
+                                                <text x="192" y="52" fill="oklch(0.88 0.14 300)" font-family="var(--font-mono)" font-size="10" font-weight="700">#shadow-root (closed)</text>
+
+                                                <!-- Secure Runtime Enclave Blocks -->
+                                                <rect x="170" y="68" width="196" height="28" rx="5" fill="oklch(0.25 0.03 250 / 0.7)" stroke="var(--border-strong)" />
+                                                <text x="180" y="85" fill="var(--text-primary)" font-family="var(--font-mono)" font-size="10" font-weight="600">Pure In-Memory Microkernel</text>
+                                                <text x="328" y="85" fill="var(--accent-cyan)" font-family="var(--font-mono)" font-size="9">0 Leaks</text>
+
+                                                <rect x="170" y="103" width="196" height="28" rx="5" fill="oklch(0.25 0.03 250 / 0.7)" stroke="var(--border-strong)" />
+                                                <text x="180" y="120" fill="var(--text-primary)" font-family="var(--font-mono)" font-size="10" font-weight="600">Local Cache (chrome.storage)</text>
+                                                <text x="328" y="120" fill="var(--accent-emerald)" font-family="var(--font-mono)" font-size="9">100%</text>
+
+                                                <rect x="170" y="138" width="196" height="28" rx="5" fill="oklch(0.25 0.03 250 / 0.7)" stroke="var(--border-strong)" />
+                                                <text x="180" y="155" fill="var(--text-primary)" font-family="var(--font-mono)" font-size="10" font-weight="600">Telemetry Egress Gate</text>
+                                                <text x="328" y="155" fill="var(--accent-amber)" font-family="var(--font-mono)" font-size="9">0 Bytes</text>
+
+                                                <text x="172" y="179" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="8.5">Zero Host Style Bleed &amp; Zero Network Beacons</text>
+                                            </svg>
+                                        </div>
+                                        <p class="stacked-card-caption" data-i18n="cardSovereigntyCaption">
+                                            Runs 100% on-device within an isolated shadow root. Zero tracking, zero snooping, and complete cryptographic privacy for everything you read.
+                                        </p>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stacked-deck-footer">
+                            <div class="stack-breadcrumbs" role="group" aria-label="Carousel slide position">
+                                <button type="button" class="stack-crumb is-active" data-index="0" data-i18n-aria="crumbParafovealAria" aria-label="Show Parafoveal Flow capability card"></button>
+                                <button type="button" class="stack-crumb" data-index="1" data-i18n-aria="crumbReticleAria" aria-label="Show ORP Reticle capability card"></button>
+                                <button type="button" class="stack-crumb" data-index="2" data-i18n-aria="crumbCadenceAria" aria-label="Show Cadence Engine capability card"></button>
+                                <button type="button" class="stack-crumb" data-index="3" data-i18n-aria="crumbSovereigntyAria" aria-label="Show Local Sovereignty capability card"></button>
+                            </div>
+                            <div class="stack-deck-controls">
+                                <button type="button" class="btn-deck-cycle" id="btn-stack-prev" data-i18n-aria="btnDeckPrevAria" aria-label="Previous capability card">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                                </button>
+                                <button type="button" class="btn-deck-cycle" id="btn-stack-next" data-i18n-aria="btnDeckNextAria" aria-label="Next capability card">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-wrapper section-mission" id="mission">
+            <!-- Atmospheric Vector Parallax Background: Bedrock Architecture & Multi-Strata Atmospheric Dust -->
+            <div class="section-parallax-bg" aria-hidden="true">
+                <div class="parallax-layer layer-land" id="parallax-layer-land">
+                    <img src="static/svg/abstract-land.svg" class="parallax-svg" alt="" loading="lazy" />
+                </div>
+                <div class="parallax-layer layer-dust-far" id="parallax-layer-dust-far">
+                    <img src="static/svg/abstract-dust-far.svg" class="parallax-svg" alt="" loading="lazy" />
+                </div>
+                <div class="parallax-layer layer-dust-mid" id="parallax-layer-dust-mid">
+                    <img src="static/svg/abstract-dust-mid.svg" class="parallax-svg" alt="" loading="lazy" />
+                </div>
+                <div class="parallax-layer layer-dust-near" id="parallax-layer-dust-near">
+                    <img src="static/svg/abstract-dust-near.svg" class="parallax-svg" alt="" loading="lazy" />
+                </div>
+            </div>
+
+            <div class="container mission-container">
+                <header class="section-header">
+                    <span class="section-kicker" data-i18n="mindsetKicker">Core Architecture</span>
+                    <h2 class="section-title" data-i18n="mindsetTitle">The ParaFlow Mindset</h2>
+                    <p class="section-subtitle" data-i18n="mindsetSubtitle">
+                        Engineered around ocular physiology and flow-state reading comprehension.
+                    </p>
+                </header>
+
+                <div class="mindset-grid">
+                    <article class="pillar-card featured">
+                        <span class="pillar-number" data-i18n="pillar1Number">01 / CONTEXT</span>
+                        <h3 class="pillar-heading" data-i18n="pillar1Heading">Parafoveal Preservation</h3>
+                        <p class="pillar-description" data-i18n="pillar1Desc">
+                            Single-word flashers delete the mental-model and the ability to follow syntax of the sentences.  ParaFlow Reader projects a dimmed Ghost Line above the active word and a Lookahead Horizon below it, preserving syntactic structure in working memory across every fixation.  Giving your eyes the opportunity to escape the confined space by which older readers did not allow.
+                        </p>
+                    </article>
+
+                    <article class="pillar-card">
+                        <span class="pillar-number" data-i18n="pillar2Number">02 / CADENCE</span>
+                        <h3 class="pillar-heading" data-i18n="pillar2Heading">Scaling Dynamics</h3>
+                        <p class="pillar-description" data-i18n="pillar2Desc">
+                            Mechanical speed readers tick at flat millisecond intervals. Human comprehension does not. ParaFlow scales multiple-factors with display duration dynamically matching cognitive processing pauses.  But it's not a locked box, take a peek, adjust settings to your liking.
+                        </p>
+                    </article>
+
+                    <article class="pillar-card">
+                        <span class="pillar-number" data-i18n="pillar3Number">03 / GEOMETRY</span>
+                        <h3 class="pillar-heading" data-i18n="pillar3Heading">Mutli-Word | ORP | Colors</h3>
+                        <p class="pillar-description" data-i18n="pillar3Desc">
+                            What's your style? We don't want to decide for. Is it the ORP? The Optical Recognition Point sits between 30% and 40% of word length. Or is it gentle-themes or getting into a flow-state that get's your mind going. ParaFlow Reader positions characters but you decide everything else.
+                        </p>
+                    </article>
+
+                    <article class="pillar-card">
+                        <span class="pillar-number" data-i18n="pillar4Number">04 / SOVEREIGNTY</span>
+                        <h3 class="pillar-heading" data-i18n="pillar4Heading">Local-First Isolation</h3>
+                        <p class="pillar-description" data-i18n="pillar4Desc">
+                            The extension runs on your device and stores any used required data strictly in browser memory so it forgets it when you leave the page.  Content is parsed from the larger text-body on the page and is processed through a sandbox (completely seperated from current page).
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-wrapper" id="cognitive-science">
+            <!-- Atmospheric Vector Parallax Background: Ocular Station & Saccadic Grid Lines -->
+            <div class="section-parallax-bg stetchy-fit" aria-hidden="true">
+                <div class="parallax-layer layer-grid layer-grid-station stetchy-fit" id="parallax-layer-grid-station">
+                    <img src="static/svg/grid-lines-station-background.svg" class="parallax-svg stetchy-fit" alt="" loading="lazy" />
+                </div>
+                <div class="parallax-layer layer-grid layer-grid-window stetchy-fit" id="parallax-layer-grid-window">
+                    <img src="static/svg/grid-lines-window.svg" class="parallax-svg stetchy-fit" alt="" loading="lazy" />
+                </div>
+                <div class="parallax-layer layer-grid layer-grid-far stetchy-fit" id="parallax-layer-grid-far">
+                    <img src="static/svg/grid-lines-far-grid.svg" class="parallax-svg stetchy-fit" alt="" loading="lazy" />
+                </div>
+                <div class="parallax-layer layer-grid layer-grid-near stetchy-fit" id="parallax-layer-grid-near">
+                    <img src="static/svg/grid-lines-near-grid.svg" class="parallax-svg stetchy-fit" alt="" loading="lazy" />
+                </div>
+                <div class="parallax-layer layer-grid layer-grid-dust stetchy-fit" id="parallax-layer-grid-dust">
+                    <img src="static/svg/grid-lines-periphery-dust.svg" class="parallax-svg stetchy-fit" alt="" loading="lazy" />
+                </div>
+            </div>
+
+            <div class="container">
+                <header class="section-header cognitive-section-header">
+                    <div class="header-text-stack kicker-stack">
+                        <span class="section-kicker kicker-sci" data-i18n="scienceKickerSci">Comparative Analysis | Cognitive Science</span>
+                        <span class="section-kicker kicker-eli10" data-i18n="scienceKickerEli10">Comparative Analysis | ELI10 Plain English</span>
+                    </div>
+                    <div class="header-text-stack title-stack">
+                        <h2 class="section-title title-sci" data-i18n="scienceTitleSci">The Biomechanics of Reading: Why Flashing Words Fails</h2>
+                        <h2 class="section-title title-eli10" data-i18n="scienceTitleEli10">Reading Fast Without Melting Your Brain</h2>
+                    </div>
+                    <div class="header-text-stack subtitle-stack">
+                        <div class="section-subtitle subtitle-sci">
+                            <span data-i18n="scienceSubtitleSci">Laboratory eye-tracking shows that single-word RSVP impairs comprehension by blocking parafoveal preview. The table below contrasts physiological demands across reading modes.</span>
+                            <button type="button" class="subtitle-jargon-cta" id="btn-jargon-buster"
+                                aria-label="Switch table perspective to ELI10 Plain English translation">
+                                <span class="jargon-cta-icon" aria-hidden="true">⚡</span>
+                                <span class="jargon-cta-text" data-i18n="scienceJargonCta">Too nerdy? Read in Plain English</span>
+                            </button>
+                        </div>
+                        <p class="section-subtitle subtitle-eli10" data-i18n="scienceSubtitleEli10">
+                            Ever tried drinking from a firehose while blinking in Morse code? Here is what actually happens inside your skull when speed-reading apps flash one word at a time.
+                        </p>
+                    </div>
+                </header>
+
+                <!-- Comparison Perspective Slider Control (Law 1.1 Native Controls) -->
+                <div class="cognitive-slider-bar" role="region" aria-label="Perspective slider controls">
+                    <button type="button" class="slider-side-btn is-active" id="btn-mode-sci"
+                        data-i18n="scienceSliderLabelSci"
+                        data-i18n-aria="scienceSliderSciBtnAria"
+                        aria-pressed="true"
+                        aria-label="Switch table perspective to Scientific Lab Spec">
+                        🔬 Scientific (Lab Spec)
+                    </button>
+                    
+                    <div class="cognitive-slider-track-wrap">
+                        <label for="cognitive-perspective-slider" class="sr-only" style="display: none;" data-i18n="scienceSliderAria">
+                            Table perspective slider: 0% Scientific to 100% ELI10 Plain English
+                        </label>
+                        <input type="range" id="cognitive-perspective-slider" class="cognitive-perspective-slider"
+                            min="0" max="100" value="0" step="1"
+                            data-i18n-aria="scienceSliderAria"
+                            aria-label="Table perspective slider: 0% Scientific to 100% ELI10 Plain English"
+                            aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                            aria-valuetext="Cognitive Science Mode" />
+                        <div class="slider-custom-handle" id="slider-handle-glyph" aria-hidden="true">
+                            <span class="handle-glyph">⤄</span>
+                        </div>
+                    </div>
+
+                    <div class="slider-side-btn-wrap">
+                        <button type="button" class="slider-side-btn" id="btn-mode-eli10"
+                            data-i18n="scienceSliderLabelEli10"
+                            data-i18n-aria="scienceSliderEli10BtnAria"
+                            aria-pressed="false"
+                            aria-label="Switch table perspective to ELI10 Plain English translation">
+                            💡 ELI10 (Plain English)
+                        </button>
+                        <button type="button" class="eli10-bubble-callout" id="eli10-speech-bubble"
+                            aria-label="Try ELI10 Plain English mode">
+                            <span class="bubble-text" data-i18n="scienceBubbleCallout">Try Me! 💡</span>
+                            <span class="bubble-tail" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="comparison-container" id="cognitive-comparison-container" data-table-mode="sci">
+                    <div class="comparison-table-wrapper">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="thCognitiveDimension">Cognitive Dimension</span>
+                                            <span class="cell-text-eli10" data-i18n="thCognitiveDimensionEli10">The Brain Problem</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="thStandardReading">Standard Page Reading</span>
+                                            <span class="cell-text-eli10" data-i18n="thStandardReadingEli10">Old-School Pages</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="thTraditionalRsvp">Traditional RSVP (Spritz / Flashing)</span>
+                                            <span class="cell-text-eli10" data-i18n="thTraditionalRsvpEli10">Word-Flashing (Spritz Apps)</span>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="highlight-col">
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="thParaflow">ParaFlow Sliding Window</span>
+                                            <span class="cell-text-eli10" data-i18n="thParaflowEli10">ParaFlow Sliding Window</span>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowParafovealHeader">Parafoveal Preview</span>
+                                            <span class="cell-text-eli10" data-i18n="rowParafovealHeaderEli10">Cheating with Peripheral Vision</span>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowParafovealStandard">15-character perceptual span; high visual clutter.</span>
+                                            <span class="cell-text-eli10" data-i18n="rowParafovealStandardEli10">You see 15 letters ahead, but your eyes wander off into margins, notifications, and ads.</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowParafovealRsvp">0 characters; peripheral field masked entirely.</span>
+                                            <span class="cell-text-eli10" data-i18n="rowParafovealRsvpEli10">Total tunnel vision. You are reading through a cocktail straw with zero peripheral clues.</span>
+                                        </div>
+                                    </td>
+                                    <td class="highlight-col">
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowParafovealParaflow">6–10 character lookahead horizon plus dimmed preceding line.</span>
+                                            <span class="cell-text-eli10" data-i18n="rowParafovealParaflowEli10">Glances ahead just enough so your brain anticipates forthcoming phrasing naturally.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowSaccadicHeader">Saccadic Fatigue</span>
+                                            <span class="cell-text-eli10" data-i18n="rowSaccadicHeaderEli10">Eye Muscle Workout (Ping-Pong)</span>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowSaccadicStandard">3 to 4 horizontal jumps per second with line-return strain.</span>
+                                            <span class="cell-text-eli10" data-i18n="rowSaccadicStandardEli10">Jumping 4 times every second until your optic nerves beg for a nap.</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowSaccadicRsvp">Stationary eyes, but high cognitive load from missing preview.</span>
+                                            <span class="cell-text-eli10" data-i18n="rowSaccadicRsvpEli10">Eyeballs freeze dead-center, but mental gears grind trying to guess what arrives next.</span>
+                                        </div>
+                                    </td>
+                                    <td class="highlight-col">
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowSaccadicParaflow">Stationary foveal anchor with smooth linear text progression.</span>
+                                            <span class="cell-text-eli10" data-i18n="rowSaccadicParaflowEli10">Eyes relax in one sweet spot while words glide naturally into your focal center.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowRegressiveHeader">Regressive Backtracking</span>
+                                            <span class="cell-text-eli10" data-i18n="rowRegressiveHeaderEli10">Double-Takes & 'Wait, What?' Moments</span>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowRegressiveStandard">15% to 25% of reading time lost to backwards scanning.</span>
+                                            <span class="cell-text-eli10" data-i18n="rowRegressiveStandardEli10">You lose 25% of reading time backtracking because you spaced out for half a second.</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowRegressiveRsvp">Impossible. Missing a single word breaks sentence comprehension.</span>
+                                            <span class="cell-text-eli10" data-i18n="rowRegressiveRsvpEli10">Blink once and that key sentence disappears forever into the digital abyss.</span>
+                                        </div>
+                                    </td>
+                                    <td class="highlight-col">
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowRegressiveParaflow">Instant backwards recovery via visible Ghost Line context.</span>
+                                            <span class="cell-text-eli10" data-i18n="rowRegressiveParaflowEli10">The dimmed Ghost Line stays right above you, acting as an instant cognitive rearview mirror.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowSyntacticHeader">Syntactic Rhythm</span>
+                                            <span class="cell-text-eli10" data-i18n="rowSyntacticHeaderEli10">Punctuation Breathing Room</span>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowSyntacticStandard">Irregular pauses determined by reader habit or page distractions (Ads | movement).</span>
+                                            <span class="cell-text-eli10" data-i18n="rowSyntacticStandardEli10">Chaotic pauses dictated by tired eyes, distractions, and layout noise.</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowSyntacticRsvp">Flat millisecond pacing ignoring clause complexity.</span>
+                                            <span class="cell-text-eli10" data-i18n="rowSyntacticRsvpEli10">Machine-gun bursts. It blasts through a period at the exact same speed as the word 'a'.</span>
+                                        </div>
+                                    </td>
+                                    <td class="highlight-col">
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowSyntacticParaflow">Dynamic duration multipliers weighted by punctuation type.</span>
+                                            <span class="cell-text-eli10" data-i18n="rowSyntacticParaflowEli10">Breathes at commas and pauses at periods like an articulate human storyteller.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowSubvocalizationHeader">Subvocalization</span>
+                                            <span class="cell-text-eli10" data-i18n="rowSubvocalizationHeaderEli10">The Voice Inside Your Head</span>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowSubvocalizationStandard">Constrained by the acoustic phonological loop at 200–250 WPM.</span>
+                                            <span class="cell-text-eli10" data-i18n="rowSubvocalizationStandardEli10">Your inner narrator mumbles every single syllable, hitting a hard speed ceiling at 250 WPM.</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowSubvocalizationRsvp">Severed abruptly, degrading working memory recall.</span>
+                                            <span class="cell-text-eli10" data-i18n="rowSubvocalizationRsvpEli10">Mutes your inner voice so violently you recognize letters but forget the plot.</span>
+                                        </div>
+                                    </td>
+                                    <td class="highlight-col">
+                                        <div class="table-cell-content">
+                                            <span class="cell-text-sci" data-i18n="rowSubvocalizationParaflow">Decoupled progressively as visual chunking expands to 500+ WPM.</span>
+                                            <span class="cell-text-eli10" data-i18n="rowSubvocalizationParaflowEli10">Gently expands your recognition into multi-word visual chunks so speed unlocks naturally.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-wrapper" id="demo">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-kicker" data-i18n="demoKicker">Interactive Demo</span>
+                    <h2 class="section-title" data-i18n="demoTitle">Experience the Sliding Window</h2>
+                    <p class="section-subtitle" data-i18n="demoSubtitle">
+                        A little taste of a speed reader. Adjust WPM to see the dynamic pauses, and test how the Peripheral Lines help with sentence recovery.
+                    </p>
+                </header>
+
+                <div class="demo-stage">
+                    <div class="demo-top-bar">
+                        <div class="demo-title-group">
+                            <span class="demo-badge" id="demo-status" data-i18n="demoStatusReady">READY</span>
+                            <span style="font-size: var(--text-sm); font-weight: 600;" id="demo-passage-title" data-i18n="demoPassageLabel">Passage:
+                                Cognitive Science of Reading</span>
+                        </div>
+
+                        <div class="deck-select-group">
+                            <label for="text-selector" style="font-size: var(--text-xs); color: var(--text-muted);" data-i18n="demoTextSourceLabel">Text
+                                Source:</label>
+                            <select id="text-selector" class="native-select">
+                                <option value="rayner" data-i18n="optRayner">1. Cognitive Psychology (Keith Rayner)</option>
+                                <option value="microkernel" data-i18n="optMicrokernel">2. Microkernel Architecture</option>
+                                <option value="flowstate" data-i18n="optFlowstate">3. Neurobiology of Flow State</option>
+                                <option value="ergonomics" data-i18n="optErgonomics">4. Parafoveal Ocular Ergonomics</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="rsvp-viewport" id="rsvp-viewport" tabindex="0" role="region"
+                        data-i18n-aria="viewportAriaLabel"
+                        aria-label="Speed reading display window">
+                        <div class="rsvp-reticle-line-top" aria-hidden="true"></div>
+                        <div class="rsvp-reticle-line-bottom" aria-hidden="true"></div>
+
+                        <div class="ghost-line" id="ghost-line" data-i18n="ghostLineInitial" aria-label="Previous sentence context">
+                            Press Play or Spacebar to begin reading.
+                        </div>
+
+                        <div class="active-line-wrapper">
+                            <div class="active-chunk-container" id="active-chunk">
+                                <span class="orp-prefix">Para</span><span class="orp-char">F</span><span
+                                    class="orp-suffix">low</span>
+                            </div>
+                        </div>
+
+                        <div class="lookahead-line" id="lookahead-line" data-i18n="lookaheadInitial" aria-label="Upcoming sentence preview">
+                            The sliding window preserves your parafoveal context across every fixation.
+                        </div>
+                    </div>
+
+                    <div class="demo-controls-grid">
+                        <div class="deck-btn-group">
+                            <button type="button" class="btn-ctrl" id="btn-step-back"
+                                data-i18n-title="btnStepBackTitle"
+                                data-i18n-aria="btnStepBackAria"
+                                title="Step Back 1 chunk (H or Left Arrow)" aria-label="Step backward">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" aria-hidden="true">
+                                    <polygon points="19 20 9 12 19 4 19 20" />
+                                    <line x1="5" y1="19" x2="5" y2="5" />
+                                </svg>
+                            </button>
+                            <button type="button" class="btn-ctrl btn-play" id="btn-play-pause"
+                                data-i18n-title="btnPlayPauseTitle"
+                                data-i18n-aria="btnPlayPauseAria"
+                                title="Play / Pause (Spacebar)" aria-label="Toggle playback">
+                                <span id="play-pause-label" data-i18n="playLabel">PLAY</span>
+                            </button>
+                            <button type="button" class="btn-ctrl" id="btn-step-fwd"
+                                data-i18n-title="btnStepFwdTitle"
+                                data-i18n-aria="btnStepFwdAria"
+                                title="Step Forward 1 chunk (L or Right Arrow)" aria-label="Step forward">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" aria-hidden="true">
+                                    <polygon points="5 4 15 12 5 20 5 4" />
+                                    <line x1="19" y1="5" x2="19" y2="19" />
+                                </svg>
+                            </button>
+                            <button type="button" class="btn-ctrl" id="btn-reset"
+                                data-i18n-title="btnResetTitle"
+                                data-i18n-aria="btnResetAria"
+                                title="Reset to start (R or Escape)"
+                                aria-label="Reset text position">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" aria-hidden="true">
+                                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                                    <path d="M3 3v5h5" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="slider-container">
+                            <div class="slider-label-row">
+                                <span data-i18n="cadenceSliderLabel">Reading Cadence (WPM)</span>
+                                <span class="slider-val-readout"><span id="wpm-display">350</span> <span data-i18n="wpmUnit">WPM</span></span>
+                            </div>
+                            <input type="range" id="wpm-slider" class="range-input" min="150" max="900" step="25"
+                                value="350" data-i18n-aria="wpmSliderAria" aria-label="Target Words Per Minute">
+                        </div>
+
+                        <div class="deck-select-group">
+                            <label for="chunk-select" style="font-size: var(--text-xs); color: var(--text-muted);" data-i18n="chunkSizeLabel">Chunk
+                                Size:</label>
+                            <select id="chunk-select" class="native-select">
+                                <option value="1" data-i18n="optChunk1">1 Word (Spotlight)</option>
+                                <option value="2" data-i18n="optChunk2" selected>2 Words (Balanced)</option>
+                                <option value="3" data-i18n="optChunk3">3 Words (Broad Field)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modern Download Call-to-Action Card -->
+                <div class="demo-download-cta" id="demo-download-cta">
+                    <div class="demo-cta-content">
+                        <div class="demo-cta-badge-row">
+                            <span class="pill-badge badge-amber" data-i18n="demoCtaBadge">Ready for Real Articles?</span>
+                            <span class="demo-cta-pill-subtle" data-i18n="demoCtaSubtleTag">100% Client-Side • Zero Tracking</span>
+                        </div>
+                        <h3 class="demo-cta-title" data-i18n="demoCtaTitle">
+                            Start Seeing How the Web Should Be
+                        </h3>
+                        <p class="demo-cta-desc" data-i18n="demoCtaDesc">
+                            Transform long-form articles, newsletters, and technical documentation into something you lookforward to reading.
+                        </p>
+                    </div>
+
+                    <div class="demo-cta-actions">
+                        <!-- Temporary non-covering overlay noting Coming Soon -->
+                        <div class="coming-soon-overlay demo-cta-overlay" aria-hidden="true">
+                            <span class="coming-soon-pill">
+                                <span class="coming-soon-pulse" aria-hidden="true"></span>
+                                <span class="coming-soon-text" data-i18n="comingSoon">Coming Soon</span>
+                            </span>
+                        </div>
+                        <a href="#download" class="btn-primary demo-cta-primary-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            <span data-i18n="demoCtaButton">Get the Free Extension</span>
+                        </a>
+                        <div class="demo-cta-browser-row">
+                            <span class="demo-cta-browser-label" data-i18n="demoCtaAvailableOn">Available for:</span>
+                            <div class="demo-cta-browser-pills">
+                                <!-- Toggle off Coming Soon for an individual button by removing 'is-coming-soon' -->
+                                <a href="https://addons.mozilla.org" class="demo-browser-pill is-coming-soon" data-coming-soon="true" target="_blank" rel="noopener noreferrer" aria-label="Download for Mozilla Firefox (Coming Soon)" title="Firefox Extension (Coming Soon)">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:middle;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 7.07 17.07A10 10 0 0 1 12 22a10 10 0 0 1-7.07-2.93A10 10 0 0 1 12 2z"/><path d="M12 6a6 6 0 0 1 6 6c0 3.31-2.69 6-6 6a6 6 0 0 1-6-6c0-1.66.67-3.16 1.76-4.24"/></svg>
+                                    <span>Firefox</span>
+                                    <span class="btn-coming-soon-tag" aria-hidden="true" data-i18n="comingSoon">Soon</span>
+                                </a>
+                                <!-- Toggle off Coming Soon for an individual button by removing 'is-coming-soon' -->
+                                <a href="https://chromewebstore.google.com" class="demo-browser-pill is-coming-soon" data-coming-soon="true" target="_blank" rel="noopener noreferrer" aria-label="Download for Google Chrome (Coming Soon)" title="Chrome Extension (Coming Soon)">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:middle;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg>
+                                    <span>Chrome</span>
+                                    <span class="btn-coming-soon-tag" aria-hidden="true" data-i18n="comingSoon">Soon</span>
+                                </a>
+                                <!-- Toggle off Coming Soon for an individual button by removing 'is-coming-soon' -->
+                                <a href="https://apps.apple.com/safari" class="demo-browser-pill is-coming-soon" data-coming-soon="true" target="_blank" rel="noopener noreferrer" aria-label="Download for Apple Safari (Coming Soon)" title="Safari Extension (Coming Soon)">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:middle;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" stroke="none"/></svg>
+                                    <span>Safari</span>
+                                    <span class="btn-coming-soon-tag" aria-hidden="true" data-i18n="comingSoon">Soon</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-wrapper" id="practice">
+            <div class="section-parallax-bg" aria-hidden="true">
+                <div class="parallax-layer layer-dots layer-dots-dispersed" id="parallax-layer-dots-dispersed">
+                    <img src="static/svg/dots-dispersed.svg" class="parallax-svg" alt="" loading="lazy" />
+                </div>
+                <div class="parallax-layer layer-dots layer-dots-top-bot" id="parallax-layer-dots-top-bot">
+                    <img src="static/svg/dots-top-bot-center.svg" class="parallax-svg" alt="" loading="lazy" />
+                </div>
+                <div class="parallax-layer layer-dots layer-dots-topleft-botright" id="parallax-layer-dots-topleft-botright">
+                    <img src="static/svg/dots-topleft-botright.svg" class="parallax-svg" alt="" loading="lazy" />
+                </div>
+                <div class="parallax-layer layer-dots layer-dots-left-right" id="parallax-layer-dots-left-right">
+                    <img src="static/svg/dots-left-right-center.svg" class="parallax-svg" alt="" loading="lazy" />
+                </div>
+            </div>
+
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-kicker" data-i18n="practiceKicker">Mastery Pathway</span>
+                    <h2 class="section-title" data-i18n="practiceTitle">How to Improve Reading Comprehension</h2>
+                    <p class="section-subtitle" data-i18n="practiceSubtitle">
+                        Transitioning from phonological vocalization or voiced-reading to direct orthographic pattern recognition follows measurable stages. Find your pace with the following benchmarks:
+                    </p>
+                </header>
+
+                <svg class="stage-clip-defs" width="0" height="0" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none;">
+                    <defs>
+                        <clipPath id="stage-wave-clip" clipPathUnits="objectBoundingBox">
+                            <path d="M 0,0.12 C 0.25,-0.06 0.75,0.22 1,0.08 L 1,0.88 C 0.75,1.02 0.25,0.74 0,0.92 Z" />
+                        </clipPath>
+                    </defs>
+                </svg>
+
+                <div class="practice-grid">
+                    <div class="stage-column">
+                        <span class="stage-phase-badge" data-i18n="phase1Badge">Initial</span>
+                        <article class="stage-card stage-card--initial">
+                            <div class="stage-media-frame stage-media--chevron">
+                                <svg class="stage-placeholder-svg" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
+                                    <line x1="0" y1="0" x2="100" y2="60" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.25" />
+                                    <line x1="100" y1="0" x2="0" y2="60" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.25" />
+                                    <circle cx="50" cy="30" r="10" stroke="currentColor" stroke-width="0.75" stroke-dasharray="2 2" stroke-opacity="0.35" fill="none" />
+                                </svg>
+                                <picture class="stage-media-picture">
+                                    <source srcset="static/sized-images/reticle-stabilization-480w.webp 480w, static/sized-images/reticle-stabilization.webp 800w" type="image/webp" />
+                                    <img src="static/img/reticle-stabilization.jpg" class="stage-media-img" alt="Reticle Stabilization speed reading demonstration" loading="lazy" decoding="async" onload="this.classList.add('is-loaded')" />
+                                </picture>
+                            </div>
+                            <div class="stage-header-block">
+                                <div class="stage-wpm" data-i18n="phase1Wpm">200–300 WPM</div>
+                                <h3 class="stage-title" data-i18n="phase1Title">Reticle Stabilization</h3>
+                            </div>
+                            <p class="stage-desc" data-i18n="phase1Desc">
+                                Lock foveal focus to the vertical reticle tick-marker. Keep three-word chunks active with lookahead enabled. Train the extraocular muscles to hold position rather than jumping laterally.
+                            </p>
+                        </article>
+                    </div>
+
+                    <div class="stage-column">
+                        <span class="stage-phase-badge" data-i18n="phase2Badge">Focus</span>
+                        <article class="stage-card stage-card--focus">
+                            <div class="stage-header-block">
+                                <div class="stage-wpm" data-i18n="phase2Wpm">350–500 WPM</div>
+                                <h3 class="stage-title" data-i18n="phase2Title">Phonological Decoupling</h3>
+                            </div>
+                            <div class="stage-media-frame stage-media--diagonal">
+                                <svg class="stage-placeholder-svg" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
+                                    <line x1="0" y1="0" x2="100" y2="60" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.25" />
+                                    <line x1="100" y1="0" x2="0" y2="60" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.25" />
+                                    <circle cx="50" cy="30" r="10" stroke="currentColor" stroke-width="0.75" stroke-dasharray="2 2" stroke-opacity="0.35" fill="none" />
+                                </svg>
+                                <picture class="stage-media-picture">
+                                    <source srcset="static/sized-images/phonological-decoupling-480w.webp 480w, static/sized-images/phonological-decoupling.webp 800w" type="image/webp" />
+                                    <img src="static/img/phonological-decoupling.jpg" class="stage-media-img" alt="Phonological Decoupling speed reading demonstration" loading="lazy" decoding="async" onload="this.classList.add('is-loaded')" />
+                                </picture>
+                            </div>
+                            <p class="stage-desc" data-i18n="phase2Desc">
+                                Above 350 WPM, vocal cords and the inner speech loop cannot keep pace. The visual cortex takes over direct lexical access. Punctuation weighting prevents working memory overload.
+                            </p>
+                        </article>
+                    </div>
+
+                    <div class="stage-column">
+                        <span class="stage-phase-badge" data-i18n="phase3Badge">Flow</span>
+                        <article class="stage-card stage-card--flow">
+                            <p class="stage-desc" data-i18n="phase3Desc">
+                                Reduce chunk size to two words. Rely on the lookahead line to pre-parse clauses before they reach center focus. The Ghost Line catches syntactically complex subordinate clauses.
+                            </p>
+                            <div class="stage-media-frame stage-media--wave">
+                                <svg class="stage-placeholder-svg" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
+                                    <line x1="0" y1="0" x2="100" y2="60" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.25" />
+                                    <line x1="100" y1="0" x2="0" y2="60" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.25" />
+                                    <circle cx="50" cy="30" r="10" stroke="currentColor" stroke-width="0.75" stroke-dasharray="2 2" stroke-opacity="0.35" fill="none" />
+                                </svg>
+                                <picture class="stage-media-picture">
+                                    <source srcset="static/sized-images/parafoveal-expansion-480w.webp 480w, static/sized-images/parafoveal-expansion.webp 800w" type="image/webp" />
+                                    <img src="static/img/parafoveal-expansion.jpg" class="stage-media-img" alt="Parafoveal Expansion speed reading demonstration" loading="lazy" decoding="async" onload="this.classList.add('is-loaded')" />
+                                </picture>
+                            </div>
+                            <div class="stage-header-block">
+                                <div class="stage-wpm" data-i18n="phase3Wpm">550–750 WPM</div>
+                                <h3 class="stage-title" data-i18n="phase3Title">Parafoveal Expansion</h3>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="stage-column">
+                        <span class="stage-phase-badge" data-i18n="phase4Badge">Achieve</span>
+                        <article class="stage-card stage-card--achieve">
+                            <div class="stage-header-block">
+                                <div class="stage-wpm" data-i18n="phase4Wpm">800–1200+ WPM</div>
+                                <h3 class="stage-title" data-i18n="phase4Title">High-Velocity Skimming</h3>
+                            </div>
+                            <p class="stage-desc" data-i18n="phase4Desc">
+                                Deploy single-word spotlighting with maximum punctuation weighting. This mode extracts arguments, variable names, and factual data points from dense technical documentation.
+                            </p>
+                            <div class="stage-media-frame stage-media--peak">
+                                <svg class="stage-placeholder-svg" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true">
+                                    <line x1="0" y1="0" x2="100" y2="60" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.25" />
+                                    <line x1="100" y1="0" x2="0" y2="60" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.25" />
+                                    <circle cx="50" cy="30" r="10" stroke="currentColor" stroke-width="0.75" stroke-dasharray="2 2" stroke-opacity="0.35" fill="none" />
+                                </svg>
+                                <picture class="stage-media-picture">
+                                    <source srcset="static/sized-images/high-velocity-skim-480w.webp 480w, static/sized-images/high-velocity-skim.webp 800w" type="image/webp" />
+                                    <img src="static/img/high-velocity-skim.jpg" class="stage-media-img" alt="High-Velocity Skimming speed reading demonstration" loading="lazy" decoding="async" onload="this.classList.add('is-loaded')" />
+                                </picture>
+                            </div>
+
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-wrapper" id="ergonomics">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-kicker" data-i18n="ergoStudioKicker">Operating Standards</span>
+                    <h2 class="section-title" data-i18n="ergoStudioTitle">Enlightening Ergonomics</h2>
+                    <p class="section-subtitle" data-i18n="ergoStudioSubtitle">
+                        Positioning yourself during speed-reading sessions is argueably more important than achieveing high wpm!  To prevent muscle strain and eye fatigue.  Follow these simple guidelines.
+                    </p>
+                </header>
+
+                <div class="ergo-studio-container">
+                    <nav class="ergo-switcher-nav" role="tablist" aria-label="Ergonomics Protocols">
+                        <button type="button" class="ergo-pill-btn is-active" role="tab" id="ergo-tab-1" aria-selected="true" aria-controls="ergo-panel-1" data-tab-index="1">
+                            <span class="ergo-pill-num">01</span>
+                            <span class="ergo-pill-label" data-i18n="ergoTab1">Eye Level</span>
+                        </button>
+                        <button type="button" class="ergo-pill-btn" role="tab" id="ergo-tab-2" aria-selected="false" aria-controls="ergo-panel-2" data-tab-index="2">
+                            <span class="ergo-pill-num">02</span>
+                            <span class="ergo-pill-label" data-i18n="ergoTab2">Viewing Distance</span>
+                        </button>
+                        <button type="button" class="ergo-pill-btn" role="tab" id="ergo-tab-3" aria-selected="false" aria-controls="ergo-panel-3" data-tab-index="3">
+                            <span class="ergo-pill-num">03</span>
+                            <span class="ergo-pill-label" data-i18n="ergoTab3">Ocular Drills</span>
+                        </button>
+                        <button type="button" class="ergo-pill-btn" role="tab" id="ergo-tab-4" aria-selected="false" aria-controls="ergo-panel-4" data-tab-index="4">
+                            <span class="ergo-pill-num">04</span>
+                            <span class="ergo-pill-label" data-i18n="ergoTab4">Halo Flow</span>
+                        </button>
+                    </nav>
+
+                    <div class="ergo-hero-card" id="ergoHeroCard">
+                        <div class="ergo-protocol-panel is-active" role="tabpanel" id="ergo-panel-1" aria-labelledby="ergo-tab-1">
+                            <div class="ergo-panel-grid">
+                                <div class="ergo-panel-main">
+                                    <span class="ergo-protocol-tag" data-i18n="ergoCard1Number">EYE LEVEL CALIBRATION</span>
+                                    <h3 class="ergo-protocol-title" data-i18n="ergoCard1Title">The 38% Golden Ratio Focal Line</h3>
+                                    <p class="ergo-protocol-lead" data-i18n="ergoCard1Desc">
+                                        Placing the Paraflow's Speed Reading window in the center of a monitor is <b>not</b> the best as it forces a horizontal gaze that actually causes neck strain after 20 minutes.  
+                                    </p>
+                                    <p class="ergo-protocol-body">
+                                        ParaFlow anchors active word streams at <strong>38% from the screen top</strong>, precisely aligning with the human eye's natural 10° to 15° downward resting angle. This eliminates ocular muscle tension and promotes effortless neutral-spine reading endurance.
+                                    </p>
+                                </div>
+                                <div class="ergo-panel-telemetry">
+                                    <div class="ergo-telemetry-box">
+                                        <span class="ergo-telemetry-label">FOCAL BASELINE</span>
+                                        <span class="ergo-telemetry-val">38% Golden Ratio</span>
+                                        <span class="ergo-telemetry-sub">Top screen downward bias</span>
+                                    </div>
+                                    <div class="ergo-telemetry-box">
+                                        <span class="ergo-telemetry-label">OCULAR REST ANGLE</span>
+                                        <span class="ergo-telemetry-val">10° – 15° Down</span>
+                                        <span class="ergo-telemetry-sub">Natural downward foveation</span>
+                                    </div>
+                                    <div class="ergo-telemetry-box">
+                                        <span class="ergo-telemetry-label">ERGONOMICS</span>
+                                        <span class="ergo-telemetry-val">Zero Neck Strain</span>
+                                        <span class="ergo-telemetry-sub">Relaxed cervical trapezius</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Protocol 2: Viewing Distance -->
+                        <div class="ergo-protocol-panel" role="tabpanel" id="ergo-panel-2" aria-labelledby="ergo-tab-2" hidden>
+                            <div class="ergo-panel-grid">
+                                <div class="ergo-panel-main">
+                                    <span class="ergo-protocol-tag">VIEWING DISTANCE</span>
+                                    <h3 class="ergo-protocol-title">50cm – 70cm Monitor Span</h3>
+                                    <p class="ergo-protocol-lead">
+                                        Viewing distance directly governs the subtended visual angle of rendered words across the retina. Sitting at arm's length optimizes orthographic resolution.
+                                    </p>
+                                    <p class="ergo-protocol-body">
+                                        At 60 centimeters, a two-word chunk spans approximately <strong>1.8 degrees of your visual angle</strong>. This fits entirely inside the high-acuity the center of your focus without triggering non-voluntary shifts in focus, preventing dry eye and cognitive distrators.
+                                    </p>
+                                </div>
+                                <div class="ergo-panel-telemetry">
+                                    <div class="ergo-telemetry-box">
+                                        <span class="ergo-telemetry-label">RECOMMENDED SPAN</span>
+                                        <span class="ergo-telemetry-val">50cm – 70cm</span>
+                                        <span class="ergo-telemetry-sub">Arm's length to display</span>
+                                    </div>
+                                    <div class="ergo-telemetry-box">
+                                        <span class="ergo-telemetry-label">SUBTENDED ARC</span>
+                                        <span class="ergo-telemetry-val">~1.8° Visual Angle</span>
+                                        <span class="ergo-telemetry-sub">Full foveal encapsulation</span>
+                                    </div>
+                                    <div class="ergo-telemetry-box">
+                                        <span class="ergo-telemetry-label">ERGONOMIC OUTCOME</span>
+                                        <span class="ergo-telemetry-val">Ocular Stability</span>
+                                        <span class="ergo-telemetry-sub">Zero lateral gaze drift</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Protocol 3: Ocular Exercises -->
+                        <div class="ergo-protocol-panel" role="tabpanel" id="ergo-panel-3" aria-labelledby="ergo-tab-3" hidden>
+                            <div class="ergo-panel-grid">
+                                <div class="ergo-panel-main">
+                                    <span class="ergo-protocol-tag">RELAXATION DRILLS</span>
+                                    <h3 class="ergo-protocol-title">Unstraining Focus</h3>
+                                    <p class="ergo-protocol-lead">
+                                        Ocular muscle drivers are benefited most from relaxing exercises. It's a bit backwards to think about but they tend to need flexing rather than unfocus. Here are 3 simple exercises:
+                                    </p>
+                                    <ul class="ergo-drill-list">
+                                        <li>
+                                            <strong>Blink! :</strong> 
+                                            As simple as it sounds, blink and blink often to rehydrate your eye's surface.  High-speed reading suppresses the spontaneous blink reflex by 60%; active blinking will help with strain.
+                                        </li>
+                                        <li>
+                                            <strong>The 20-20-20 Rule:</strong> Every 20 minutes, take 20 seconds and look at an intricate target 20ft away (6m).
+                                            This loosens strained muscles training them to relax and refocus.
+                                        </li>
+                                        <li>
+                                            <strong>Monocular Occlusion:</strong> Practice short intervals with one eye gently covered and closed to balance bilateral strength and relieve unilateral fatigue.
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="ergo-panel-telemetry">
+                                    <div class="ergo-telemetry-box">
+                                        <span class="ergo-telemetry-label">DRILL FREQUENCY</span>
+                                        <span class="ergo-telemetry-val">20-20-20 Benchmark</span>
+                                        <span class="ergo-telemetry-sub">Periodic ciliary release</span>
+                                    </div>
+                                    <div class="ergo-telemetry-box">
+                                        <span class="ergo-telemetry-label">BLINK DYNAMICS</span>
+                                        <span class="ergo-telemetry-val">Active Double-Blink</span>
+                                        <span class="ergo-telemetry-sub">Tear film rehydration</span>
+                                    </div>
+                                    <div class="ergo-telemetry-box">
+                                        <span class="ergo-telemetry-label">ERGONOMIC OUTCOME</span>
+                                        <span class="ergo-telemetry-val">Asthenopia Relief</span>
+                                        <span class="ergo-telemetry-sub">Ciliary spasm prevention</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Protocol 4: Halo Flow Method -->
+                        <div class="ergo-protocol-panel" role="tabpanel" id="ergo-panel-4" aria-labelledby="ergo-tab-4" hidden>
+                            <div class="ergo-panel-grid">
+                                <div class="ergo-panel-main">
+                                    <span class="ergo-protocol-tag">FLOW STATE HELP</span>
+                                    <h3 class="ergo-protocol-title">The Halo Method for Flow States</h3>
+                                    <p class="ergo-protocol-lead">
+                                        Expands the perceptual span to utilize parafoveal vision; reduces eye jumps (fixations) and backward drifting (regressions).
+                                    </p>
+                                    <ol class="ergo-drill-list ergo-ordered-list">
+                                        <li>
+                                            <strong>Mental Spotlight:</strong>Imagine a halo-light from the top-crown of your head, which is slightly pointed down,  illuminating what you are reading like a soft spotlight.
+                                        </li>
+                                        <li>
+                                            <strong>Lifting Perspective:</strong>Elevate your perception to observe from the Halo (almost like out-of-body) and allow your eyes to relax in a feeling of non-focus.
+                                        </li>
+                                        <li>
+                                            <strong>Anchoring:</strong> Keep soft gaze pinned to the vertical ORP | central word while allowing the ghost and lookahead lines to flow into your gaze, trying to keep your eyes on the central point.
+                                        </li>
+                                        <li>
+                                            <strong>Velocity Cadence:</strong> Keep a smooth stream of text flowing and maintain this relaxed posture and feeling of flow-state for extended, fatigue-free reading sessions.
+                                        </li>
+                                    </ol>
+                                </div>
+                                <div class="ergo-panel-telemetry">
+                                    <div class="ergo-telemetry-box">
+                                        <span class="ergo-telemetry-label">PARAFOVEAL FIELD</span>
+                                        <span class="ergo-telemetry-val">Ambient Halo Mode</span>
+                                        <span class="ergo-telemetry-sub">Peripheral syntactic preview</span>
+                                    </div>
+                                    <div class="ergo-telemetry-box">
+                                        <span class="ergo-telemetry-label">SACCADE REDUCTION</span>
+                                        <span class="ergo-telemetry-val">Zero Regression</span>
+                                        <span class="ergo-telemetry-sub">Eliminates backtrack loops</span>
+                                    </div>
+                                    <div class="ergo-telemetry-box">
+                                        <span class="ergo-telemetry-label">ERGONOMIC OUTCOME</span>
+                                        <span class="ergo-telemetry-val">Deep Reading Flow</span>
+                                        <span class="ergo-telemetry-sub">Subconscious lexical uptake</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hotkeys-grid">
+                    <div class="hotkey-item">
+                        <span data-i18n="hotkeyPlay">Toggle Playback</span>
+                        <kbd>Space</kbd>
+                    </div>
+                    <div class="hotkey-item">
+                        <span data-i18n="hotkeySpeed">Nudge Speed ±25 WPM</span>
+                        <div><kbd>J</kbd> / <kbd>K</kbd></div>
+                    </div>
+                    <div class="hotkey-item">
+                        <span data-i18n="hotkeyStep">Step Line Back / Forward</span>
+                        <div><kbd>H</kbd> / <kbd>L</kbd></div>
+                    </div>
+                    <div class="hotkey-item">
+                        <span data-i18n="hotkeyChunk">Adjust Chunk Size</span>
+                        <div><kbd>[</kbd> / <kbd>]</kbd></div>
+                    </div>
+                    <div class="hotkey-item">
+                        <span data-i18n="hotkeyReset">Reset to Article Start</span>
+                        <kbd>R</kbd>
+                    </div>
+                    <div class="hotkey-item">
+                        <span data-i18n="hotkeyDismiss">Dismiss / Close Overlay</span>
+                        <kbd>Esc</kbd>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-wrapper section-download" id="download">
+            <!-- Multi-Strata Fluid Wave Parallax Background (Todo-3) -->
+            <div class="section-parallax-bg" aria-hidden="true">
+                <div class="parallax-layer layer-waves-far" id="parallax-layer-waves-far">
+                    <img src="static/svg/abstract-waves-far.svg" class="parallax-svg" alt="" loading="lazy" />
+                </div>
+                <div class="parallax-layer layer-waves-mid" id="parallax-layer-waves-mid">
+                    <img src="static/svg/abstract-waves-mid.svg" class="parallax-svg" alt="" loading="lazy" />
+                </div>
+                <div class="parallax-layer layer-waves-near" id="parallax-layer-waves-near">
+                    <img src="static/svg/abstract-waves-near.svg" class="parallax-svg" alt="" loading="lazy" />
+                </div>
+            </div>
+
+            <div class="container download-container">
+                <header class="section-header">
+                    <span class="section-kicker" data-i18n="downloadKicker">Download Extension</span>
+                    <h2 class="section-title download-main-title" data-i18n="downloadTitle">Get the ParaFlow - Browser Extenion</h2>
+                    <p class="section-subtitle" data-i18n="downloadSubtitle">
+                        Paraflow is a browser extension that is sandboxed in your browser of choice which enables a secure environment and your decicsion on which pages the extension are used.
+                    </p>
+                </header>
+
+                <!-- Browser Extensions Hero Card -->
+                <div class="download-card platform-card">
+                    <div class="platform-card-header">
+                        <h3 class="platform-heading" data-i18n="platformHeading">Browser Extensions</h3>
+                        <p class="platform-subheading" data-i18n="platformSubheading">
+                            ParaFlow is available for the following browsers as an extension.
+                        </p>
+                    </div>
+
+                    <div class="browser-grid">
+                        <!-- Temporary non-covering overlay noting Coming Soon -->
+                        <div class="coming-soon-overlay browser-grid-overlay" aria-hidden="true">
+                            <span class="coming-soon-pill">
+                                <span class="coming-soon-pulse" aria-hidden="true"></span>
+                                <span class="coming-soon-text" data-i18n="comingSoon">Coming Soon</span>
+                            </span>
+                        </div>
+
+                        <!-- Toggle off Coming Soon for an individual button by removing 'is-coming-soon' -->
+                        <a href="https://apps.apple.com/safari" target="_blank" rel="noopener noreferrer" class="browser-btn btn-safari is-coming-soon" data-coming-soon="true" aria-label="Download for Apple Safari (Coming Soon)">
+                            <span class="browser-icon" aria-hidden="true">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" stroke="none" />
+                                </svg>
+                            </span>
+                            <span class="browser-text">
+                                <span class="browser-action" data-i18n="browserDownloadPrefix">Download for</span>
+                                <span class="browser-name">Apple Safari</span>
+                            </span>
+                            <span class="btn-coming-soon-tag" aria-hidden="true" data-i18n="comingSoon">Coming Soon</span>
+                        </a>
+
+                        <!-- Toggle off Coming Soon for an individual button by removing 'is-coming-soon' -->
+                        <a href="https://chromewebstore.google.com" target="_blank" rel="noopener noreferrer" class="browser-btn btn-chrome is-coming-soon" data-coming-soon="true" aria-label="Download for Google Chrome (Coming Soon)">
+                            <span class="browser-icon" aria-hidden="true">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <circle cx="12" cy="12" r="4" />
+                                    <line x1="21.17" y1="8" x2="12" y2="8" />
+                                    <line x1="3.95" y1="6.06" x2="8.54" y2="14" />
+                                    <line x1="10.88" y1="21.94" x2="15.46" y2="14" />
+                                </svg>
+                            </span>
+                            <span class="browser-text">
+                                <span class="browser-action" data-i18n="browserDownloadPrefix">Download for</span>
+                                <span class="browser-name">Google Chrome</span>
+                            </span>
+                            <span class="btn-coming-soon-tag" aria-hidden="true" data-i18n="comingSoon">Coming Soon</span>
+                        </a>
+
+                        <!-- Toggle off Coming Soon for an individual button by removing 'is-coming-soon' -->
+                        <a href="https://addons.mozilla.org" target="_blank" rel="noopener noreferrer" class="browser-btn btn-firefox is-coming-soon" data-coming-soon="true" aria-label="Download for Mozilla Firefox (Coming Soon)">
+                            <span class="browser-icon" aria-hidden="true">
+                                <svg width="28" height="28" viewBox="0 0 32 32" fill="currentColor" stroke="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.807 9.776c0.011 0 0.005 0 0 0zM8.109 7.927c0.011 0 0.005 0 0 0zM30.229 10.781c-0.667-1.604-2.021-3.333-3.079-3.885 0.865 1.692 1.365 3.396 1.552 4.661l0.005 0.027c-1.739-4.329-4.681-6.073-7.088-9.871-0.12-0.192-0.24-0.385-0.36-0.588-0.063-0.104-0.115-0.208-0.172-0.319-0.099-0.192-0.171-0.395-0.224-0.609 0-0.020-0.015-0.036-0.036-0.041-0.011 0-0.021 0-0.031 0l-0.005 0.005c-0.005 0-0.011 0.005-0.011 0.005s0-0.005 0.005-0.011c-3.417 2-4.828 5.505-5.193 7.729-1.057 0.063-2.088 0.328-3.041 0.776-0.183 0.093-0.265 0.303-0.197 0.489 0.077 0.213 0.317 0.319 0.525 0.224 0.833-0.391 1.729-0.625 2.651-0.687l0.089-0.011c0.125-0.005 0.255-0.011 0.38-0.011 0.745-0.005 1.489 0.099 2.203 0.307l0.125 0.037c0.12 0.036 0.235 0.077 0.355 0.12 0.083 0.031 0.172 0.063 0.255 0.099 0.068 0.025 0.136 0.057 0.203 0.083 0.105 0.048 0.209 0.1 0.313 0.152l0.14 0.067c0.104 0.053 0.204 0.109 0.303 0.167 0.063 0.037 0.125 0.073 0.187 0.115 1.111 0.688 2.037 1.641 2.683 2.776-0.817-0.572-2.287-1.145-3.697-0.895 5.52 2.76 4.036 12.265-3.615 11.905-0.683-0.025-1.355-0.156-1.995-0.385-0.156-0.057-0.308-0.12-0.453-0.183-0.088-0.041-0.177-0.083-0.26-0.124-1.876-0.969-3.423-2.803-3.615-5.027 0 0 0.708-2.64 5.072-2.64 0.475 0 1.824-1.319 1.849-1.699-0.011-0.125-2.683-1.187-3.724-2.213-0.557-0.547-0.817-0.812-1.052-1.011-0.125-0.109-0.26-0.208-0.401-0.301-0.348-1.224-0.364-2.521-0.041-3.751-1.579 0.719-2.803 1.855-3.693 2.855h-0.009c-0.609-0.771-0.563-3.313-0.532-3.844-0.005-0.036-0.453 0.229-0.511 0.271-0.536 0.385-1.041 0.813-1.5 1.287-0.525 0.531-1.004 1.104-1.437 1.719-0.984 1.396-1.687 2.979-2.057 4.645-0.005 0.021-0.145 0.647-0.249 1.417-0.021 0.12-0.037 0.24-0.052 0.359-0.043 0.292-0.073 0.589-0.089 0.881l-0.005 0.047c-0.009 0.172-0.020 0.339-0.031 0.511v0.077c0 8.48 6.875 15.355 15.355 15.355 7.593 0 13.9-5.516 15.135-12.756 0.027-0.197 0.047-0.395 0.068-0.593 0.307-2.631-0.031-5.401-0.995-7.713z"/>
+                                </svg>
+                            </span>
+                            <span class="browser-text">
+                                <span class="browser-action" data-i18n="browserDownloadPrefix">Download for</span>
+                                <span class="browser-name">Mozilla Firefox</span>
+                            </span>
+                            <span class="btn-coming-soon-tag" aria-hidden="true" data-i18n="comingSoon">Coming Soon</span>
+                        </a>
+                    </div>
+                    <a href="https://github.com/ParaFlow-Speed-Reader/Paraflow-Landing/releases" class="browser-btn direct-download-pill" target="_blank" rel="noopener noreferrer" data-i18n="directDownloadPill">
+                        Or download directly
+                    </a>
+                </div>
+
+                <!-- Community Feature Addition Cards (Todo-2 Slingshot Mechanics) -->
+                <div class="download-action-row" id="download-action-row">
+                    <!-- Left Action Card: Feature Idea -->
+                    <a href="https://github.com/ParaFlow-Speed-Reader/Paraflow-Landing/discussions" target="_blank" rel="noopener noreferrer" class="action-card card-feature-idea" id="btn-feature-idea" aria-label="Feature Idea: Add an Idea for possible future release">
+                        <div class="action-card-content">
+                            <span class="action-card-kicker" data-i18n="featureIdeaKicker">★ Feature Idea ★</span>
+                            <h4 class="action-card-title" data-i18n="featureIdeaTitle">Have an idea with potential? Submit a feature request by clicking here!</h4>
+                            <span class="action-card-cta" data-i18n="featureIdeaCta">Communicate with the Team!</span>
+                        </div>
+                        <div class="slingshot-icon-stage" aria-hidden="true">
+                            <div class="slingshot-icon-wrapper icon-feature">
+                                <svg class="slingshot-svg svg-feature" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.04 24" fill="currentColor">
+                                    <path class="slingshot-path slingshot-rate-base slingshot-feature-head" d="M6.758 10.68c-2.634-.0356-5.167 1.741-6.026 4.232-.8518 2.314-.2217 5.081 1.564 6.785 1.981 1.98 5.302 2.37 7.699.9314 1.948-1.11 3.163-3.304 3.177-5.534.1157-2.391-1.276-4.823-3.494-5.786-.9142-.4122-1.917-.6231-2.919-.6281zm2.819 3.475c.7931-.0437 1.348.9658.8721 1.607-.4144.692-1.562.5797-1.84-.1753-.2925-.6597.2475-1.455.9677-1.432zm-5.623 0c.7931-.0437 1.348.9658.8721 1.607-.4144.692-1.562.5797-1.84-.1753-.2925-.6597.2475-1.455.9677-1.432zm7.055 3.804c-.2457 2.057-2.172 3.732-4.244 3.684-2.106.0502-4.081-1.693-4.247-3.799.0423-.497.5867-.4845.9603-.4666 2.374.0071 4.749-.0143 7.122.0107.257.0467.4527.3104.4079.571z"/>
+                                    <path class="slingshot-path slingshot-rate-mid slingshot-feature-bulb" id="feature-bulb-rays" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width=".9743" d="M6.722.9935v.4871m3.444.9402-.3459.3459m-6.542-.3459.3459.3459m5.534 3.098c.0836-1.854-2.258-3.12-3.763-2.035-1.327.7976-1.409 2.698-.4054 3.775.3264.4987.2687 1.104.2719 1.67.0037.5005.5274.5038.8878.4871.5475-.0058 1.096.0119 1.643-.0094.3655-.0595.4182-.4516.3921-.7532-.0257-.6234.0784-1.276.5331-1.746a2.404 2.404 0 0 0 .4412-1.389z"/>
+                                    <path class="slingshot-path slingshot-rate-high slingshot-feature-plus" d="M16.68 11.94h-1.915v1.915h-1.618V11.94h-1.915v-1.636h1.915V8.407h1.618v1.897h1.915z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Right Action Card: Issue Report -->
+                    <a href="https://github.com/ParaFlow-Speed-Reader/Paraflow-Landing/issues" target="_blank" rel="noopener noreferrer" class="action-card card-issue-report" id="btn-issue-report" aria-label="Issue? Please visit Paraflow's Github to submit a report for fixing">
+                        <div class="action-card-content">
+                            <h4 class="action-card-title" data-i18n="issueReportTitle">Report an Issue: Click Here! To submit a report for response.</h4>
+                            <span class="action-card-cta" data-i18n="issueReportCta">Notify the team.</span>
+                        </div>
+                        <div class="slingshot-icon-stage" aria-hidden="true">
+                            <div class="slingshot-icon-wrapper icon-issue">
+                                <svg class="slingshot-svg svg-issue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20" fill="currentColor">
+                                    <path class="slingshot-path slingshot-rate-base slingshot-issue-horn" d="M4.135 15.7c-1.718-.6046-2.848-2.816-2.558-5.007.2361-1.786 1.237-3.173 2.624-3.635 1.896-.6321 3.868 1.071 4.207 3.635.2253 1.704-.4649 3.607-1.635 4.508-.7534.5799-1.829.7836-2.637.4994zm1.983-1.043c.4206-.2478 1.032-.9033 1.032-1.106 0-.196-.4883-.8324-.7898-1.029-.2324-.1517-.3925-.3461-.7706-.1267-.7126.4135-.542.354-1.14 0-.328-.0432-.514-.0203-.7429.0916-.3119.1524-.8733.8352-.8733 1.062 0 .1586.5386.7966.8449 1.001.4644.3097.7831.392 1.418.366.5-.0203.7064-.0725 1.022-.2583zm1.171-5.27c0-.2101-.7494-1.038-1.166-1.287-.3565-.2138-.4808-.2399-1.131-.2378-.663.0022-.7698.0265-1.149.2616-.4357.2704-1.149 1.055-1.149 1.264 0 .0991.4169-.3304 2.303-.3304s2.292.4295 2.292.3304zM16.58 4.419c-.3247.0068-.6277.2952-.8886.8727-.5474.8412-1.801 2.31-2.678 2.141-.3724-.079-.5153.1445-.5153.8063.4723 2.339.4934 1.684-1.457 2.432.2087.3099.4146.504.6834.7953.4561-.438.9981-.3308 1.359-.18.3749.2429.3548.0554.5297.0269.4437-.0723.8279-.4192 1.271-.4943.7019-.0893 1.395-.2132 2.018.0768.7494.3967 1.304.5446 1.658-.2392.1593-.3599.1736-.4778.1681-1.377-.0075-1.213-.169-1.983-.6523-3.109-.5017-1.169-1.022-1.76-1.497-1.75zm1.015 1.307c.9756 1.568 1.124 5.604-.0427 5.049-1.354-1.023-2.035-3.989-1.511-5.407.3834-1.097.9923-.4575 1.553.3582zm-2.048.5506c-.0387.48-.0172.9653.0506 1.49-.0236.0343-2.632.9434-2.733.9527-.1327-.2058-.0871-.4023-.0871-.6821.9956-.4916 2.083-1.061 2.77-1.76zm-3.086.9322c-.2969.0216-1.665.4974-1.781.6295-.1148.1296-.0391 1.778.1049 2.286.0644.2273.1548.411.2013.4082.5684-.1774 1.044-.2866 1.612-.5529-.0733-.7231-.5648-1.979-.1128-2.534.1567-.1889.1571-.1942.0206-.2346q-.0146-.0043-.0445-.002zm-.3123.3568c-.1343.2356-.1414.6068-.07 1.357-.317.0339-.548-.948-.7157-1.114.21-.1707.5756-.2216.7857-.2435zm-1.76.6214c-.4347.1861-.9612.426-1.168.8005-.2712.5024.2467 2.194.6774 2.643.5654.3071.7002.2776 1.506.036-.8184-.861-1.025-2.104-1.023-2.796zm-.2036.6124c-.0128.2139.0518.601-.1709.6887-.2995.1179-.7013.2003-.7523.2002-.0132-.4657.5996-.8549.9233-.8889zm4.497 2.273c-.1894-.0061-.8598.3618-.8598.4718.2832.3997.2366.8571-.072 1.106-.2087.1608-.2963.1799-.6423.1404-.3589-.041-.4007-.0305-.4007.1008 0 .177.151.4556.3843.5173.582-.2278 2.088-.9619 2.113-1.597 0-.3195-.2459-.7297-.5228-.7386zm-2.302.1736c-.1201.0006-1.462 1.223-1.553 1.415-.0661.8031.3083 1.266.3 2.149-.6266.9913-1.341 1.285-.9741 1.892.4345.7181 1.92.9449 2.518.018.4095-.5572 1.367-.514.7564-1.357-.1427-.0619-.3154-.4798-.2681-.6484-.0677-.3855-.4031-.597-.3565-.9397.0463-.3856-.1753-.4593-.3043-.7569 0-.1402-.0625-.147-.3264-.0358-.2445-.0088.1909-.3505.3614-.5414l.3912.0832c.2152.0457.4734.0597.5739.0312.2332-.0661.3908-.3419.3419-.5619-.2747-.497-.9699-.6262-1.46-.7473zm2.549 1.414c-.637.468-1.276.6275-1.922 1.13-.0566.1651.2506.7285.4465.7234 1.022-.4675 1.34-.4757 1.857-.9546.2554-.403.033-1.202-.381-.8983zm-.7219 1.728c-.8067.2987-.7818.2318-.4146 1.118.1967.4571.5265.2374.814.1228.5459-.3271.5553-.7196.5662-.9435-.2077-.7142-.4978-.47-.9657-.2976zM21.14 10.19c-.4755-.4541-.5057-.7535-.0442-.438.1985.1358.2917.1465.265.0304-.0524-.228.0333-.1954.5878.2235.4679.3534.5559.6437.1525.5032-.1273-.0444-.3016-.0446-.3874-.0004-.0876.045-.3392-.0947-.5737-.3187zm-1.606-6.792c.1363-.5204.2279-.6729.3734-.6222.1061.037.2187-.0265.2503-.141s.1264-.2282.2106-.2527c.0936-.0272.0825.2119-.0285.6142-.1258.456-.235.6402-.3549.5984-.0953-.0332-.2763.064-.4024.2162-.2004.2418-.2065.1899-.0486-.4129zM19.25 5.894c.005-.0614.3301-.302.7228-.5346.6582-.3899.6946-.4434.4658-.685-.2024-.2138-.2085-.2866-.0332-.3954.3055-.1895 2.779-.6617 2.863-.5465.0383.0527-.284.2796-.7165.5041-.7368.3827-.7725.429-.5693.7388.1192.1818.187.3572.1505.3898-.1446.1294-2.891.6331-2.883.5287zM19.6 7.423c.0162.0411.3315.1383.7007.2161.6189.1303.6594.1594.5189.3727-.1243.1887-.115.2399.0509.278.289.0664 2.418-.1245 2.464-.2209.021-.044-.2892-.1325-.6894-.1965-.6822-.1091-.7207-.1334-.6147-.388.0622-.1494.0832-.2838.0468-.2985-.1446-.0586-2.505.1674-2.477.2373z"/>
+                                    <path class="slingshot-path slingshot-rate-mid slingshot-issue-horn-tip" d="M.9864 6.46C.5676 5.8441.5489 4.789.9445 4.097c.7401-1.293 1.927.2478 1.445 1.876-.4664-.6014-1.022.1791-1.403.4865zm6.785.1409c-.6706-.4324-.5333-2.274.092-2.792.3442-.2854.4822-.2883.8097-.0167.4774.3959.6581 1.352.4125 2.182-.7975-.5865-.9043-.214-1.314.6275z"/>
+                                    <path class="slingshot-path slingshot-rate-high slingshot-issue-details" d="M16.51 5.759c-.062.004-.119.0366-.1666.1083-.1812.4449-.1439 1.008-.1511 1.38.026.2198.1204.8787.2367 1.3.158.5923.509 1.302 1.062 1.631.4658.1921.5232-1.199.4084-1.845-.1137-.6571-.2881-1.334-.6238-1.882-.1299-.1893-.4966-.7092-.7657-.6922zm-.3177 1.489c-.026-.2198-.0072.3726 0 0m1.122-.004c.2268 0 .4466.4086.447.8305.0004.5286-.2384.6667-.4827.279-.0793-.1256-.1442-.2718-.1442-.3246 0-.0679-.0666-.0792-.2264-.0382-.3804.0975-.4998.0861-.5243-.0502-.017-.095.0708-.1653.3257-.261.2178-.0817.365-.188.3917-.283.027-.096.1059-.1525.2133-.1525z"/>
+                                    <path class="slingshot-path slingshot-rate-max slingshot-issue-waves" d="M17.62 11.18c-.5958-.8291-.9738-1.914-1.265-2.991-.2218-1.148-.3949-2.421-.0729-3.553.1717-.6272.7517-.9943 1.179-.5502.8064.7231 1.238 1.997 1.544 3.201.2518 1.16.4426 2.481.0652 3.618-.478.8677-.9888.7746-1.45.2763zm.0278-6.446c-.531-.8384-.8611-.4769-1.007-.154-.6483 1.765.047 4.187.735 5.621.2316.5345.6029.9857 1.058 1.021 1.067-.5501.4472-3.397.4169-3.533-.103-.4618-.29-1.513-1.203-2.955z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-wrapper" id="taxonomy">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-kicker" data-i18n="taxKicker">Technical Lexicon</span>
+                    <h2 class="section-title" data-i18n="taxTitle">Taxonomy & Terminology</h2>
+                    <p class="section-subtitle" data-i18n="taxSubtitle">
+                        Formal definitions from cognitive psychology and ocular motor research.
+                    </p>
+                </header>
+
+                <div class="taxonomy-list">
+                    <details class="taxonomy-item" open>
+                        <summary class="taxonomy-summary">
+                            <span data-i18n="termParafoveal">Parafoveal Preview</span>
+                            <span>+</span>
+                        </summary>
+                        <p class="taxonomy-def" data-i18n="defParafoveal">
+                            The retinal zone spanning 2° to 5° around the foveal center. Acuity is lower than foveal vision, but the visual cortex extracts word length, initial consonants, and space boundaries to program the amplitude of upcoming saccades.
+                        </p>
+                    </details>
+
+                    <details class="taxonomy-item">
+                        <summary class="taxonomy-summary">
+                            <span data-i18n="termOrp">Optical Recognition Point (ORP)</span>
+                            <span>+</span>
+                        </summary>
+                        <p class="taxonomy-def" data-i18n="defOrp">
+                            The ocular fixation point within a word that minimizes letter recognition latency. For Latin scripts, this point sits between 30% and 40% of the total word length from the initial character.
+                        </p>
+                    </details>
+
+                    <details class="taxonomy-item">
+                        <summary class="taxonomy-summary">
+                            <span data-i18n="termGhostLine">Ghost Line</span>
+                            <span>+</span>
+                        </summary>
+                        <p class="taxonomy-def" data-i18n="defGhostLine">
+                            A dimmed rendering of the preceding text line displayed directly above active reading coordinates. It provides working memory with an immediate syntactic anchor when parsing multi-clause sentences.
+                        </p>
+                    </details>
+
+                    <details class="taxonomy-item">
+                        <summary class="taxonomy-summary">
+                            <span data-i18n="termLookahead">Lookahead Horizon</span>
+                            <span>+</span>
+                        </summary>
+                        <p class="taxonomy-def" data-i18n="defLookahead">
+                            Configurable upcoming text lines displayed below the active word chunk. It provides parafoveal preview data so the brain preprocesses downstream syntactic units before fixating upon them.
+                        </p>
+                    </details>
+
+                    <details class="taxonomy-item">
+                        <summary class="taxonomy-summary">
+                            <span data-i18n="termCadence">Punctuation Cadence Multiplier</span>
+                            <span>+</span>
+                        </summary>
+                        <p class="taxonomy-def" data-i18n="defCadence">
+                            A dynamic scaling algorithm that extends tick duration at punctuation boundaries: 1.35x for commas and semicolons, 1.8x for sentence terminators, and 2.2x for paragraph breaks.
+                        </p>
+                    </details>
+
+                    <details class="taxonomy-item">
+                        <summary class="taxonomy-summary">
+                            <span data-i18n="termSaccade">Regressive Saccade</span>
+                            <span>+</span>
+                        </summary>
+                        <p class="taxonomy-def" data-i18n="defSaccade">
+                            An involuntary backwards eye jump triggered when sentence comprehension fails. In conventional reading, regressions account for 15% to 25% of total ocular movements.
+                        </p>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand-title" data-i18n="footerBrandTitle">ParaFlow Speed Reading Engine</div>
+                    <p style="max-width: 28rem; line-height: 1.6; margin-bottom: var(--space-sm);" data-i18n="footerBrandDesc">
+                        A high-performance speed-reading engine designed to preserve parafoveal vision, stabilize ocular fixations, and maintain reading comprehension.
+                    </p>
+                    <p style="color: var(--text-muted);">
+                        <span data-i18n="footerGovernedPrefix">Built as a landing page for </span><a href="https://github.com/ParaFlow-Speed-Reader/Paraflow-Landing"
+                            style="color: var(--accent-amber);" data-i18n="footerGovernedLink">ParaFlow Reader Browser Extension</a><span data-i18n="footerGovernedSuffix">With Zero tracking. 100% local storage.</span>
+                    </p>
+                </div>
+
+                <div>
+                    <div
+                        style="font-family: var(--font-mono); font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-xs);" data-i18n="footerAcademicHeading">
+                        Academic Sources</div>
+                    <ul class="footer-citations-list">
+                        <li><a href="https://doi.org/10.1037/0033-2909.124.3.372" target="_blank"
+                                rel="noopener noreferrer" data-i18n="citationRayner">Rayner, K. (1998) Eye Movements in Reading</a></li>
+                        <li><a href="https://doi.org/10.1037/0033-295X.87.4.329" target="_blank"
+                                rel="noopener noreferrer" data-i18n="citationJust">Just & Carpenter (1980) Cognitive Theory of Reading</a></li>
+                        <li><a href="https://doi.org/10.1016/0010-0285(79)90009-8" target="_blank"
+                                rel="noopener noreferrer" data-i18n="citationMcConkie">McConkie & Rayner (1975) Asymmetric Perceptual Span</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-download-column">
+                    <div class="footer-download-header">
+                        <div
+                            style="font-family: var(--font-mono); font-weight: 700; color: var(--text-primary);" data-i18n="footerDownloadHeading">
+                            Download</div>
+                        <!-- Temporary non-covering overlay noting Coming Soon -->
+                        <div class="coming-soon-overlay footer-column-overlay" aria-hidden="true">
+                            <span class="coming-soon-pill">
+                                <span class="coming-soon-pulse" aria-hidden="true"></span>
+                                <span class="coming-soon-text" data-i18n="comingSoon">Coming Soon</span>
+                            </span>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.5; margin-bottom: var(--space-xs); margin-top: var(--space-xs);" data-i18n="footerDownloadDesc">
+                        Fast, privacy-first speed reader for modern browsers.
+                    </p>
+                    <div class="footer-browser-mini-grid">
+                        <!-- Toggle off Coming Soon for an individual button by removing 'is-coming-soon' -->
+                        <a href="https://addons.mozilla.org" class="footer-browser-btn footer-btn-firefox is-coming-soon" data-coming-soon="true" target="_blank" rel="noopener noreferrer" aria-label="Download for Mozilla Firefox (Coming Soon)" title="Download for Mozilla Firefox (Coming Soon)">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:middle;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 7.07 17.07A10 10 0 0 1 12 22a10 10 0 0 1-7.07-2.93A10 10 0 0 1 12 2z"/><path d="M12 6a6 6 0 0 1 6 6c0 3.31-2.69 6-6 6a6 6 0 0 1-6-6c0-1.66.67-3.16 1.76-4.24"/></svg>
+                            <span>Firefox</span>
+                            <span class="btn-coming-soon-tag" aria-hidden="true" data-i18n="comingSoon">Soon</span>
+                        </a>
+                        <!-- Toggle off Coming Soon for an individual button by removing 'is-coming-soon' -->
+                        <a href="https://chromewebstore.google.com" class="footer-browser-btn footer-btn-chrome is-coming-soon" data-coming-soon="true" target="_blank" rel="noopener noreferrer" aria-label="Download for Google Chrome (Coming Soon)" title="Download for Google Chrome (Coming Soon)">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:middle;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg>
+                            <span>Chrome</span>
+                            <span class="btn-coming-soon-tag" aria-hidden="true" data-i18n="comingSoon">Soon</span>
+                        </a>
+                        <!-- Toggle off Coming Soon for an individual button by removing 'is-coming-soon' -->
+                        <a href="https://apps.apple.com/safari" class="footer-browser-btn footer-btn-safari is-coming-soon" data-coming-soon="true" target="_blank" rel="noopener noreferrer" aria-label="Download for Apple Safari (Coming Soon)" title="Download for Apple Safari (Coming Soon)">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:middle;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" stroke="none"/></svg>
+                            <span>Safari</span>
+                            <span class="btn-coming-soon-tag" aria-hidden="true" data-i18n="comingSoon">Soon</span>
+                        </a>
+                    </div>
+                    <div style="margin-top: var(--space-xs);">
+                        <a href="#download" class="footer-direct-link" data-i18n="footerDirectDownload">Direct Package (.xpi / .zip) &rarr;</a>
+                    </div>
+                </div>
+
+                <div>
+                    <div
+                        style="font-family: var(--font-mono); font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-xs);" data-i18n="footerRepoHeading">
+                        Repository</div>
+                    <ul class="footer-citations-list">
+                        <li><a href="https://github.com/ParaFlow-Speed-Reader/Paraflow-Landing" target="_blank" rel="noopener noreferrer" data-i18n="repoLink">GitHub Source
+                                Repository</a></li>
+                        <li><a href="#demo" data-i18n="workbenchLink">Interactive In-Page Workbench</a></li>
+                        <li><a href="https://github.com/ParaFlow-Speed-Reader/Paraflow-Landing/discussions" target="_blank" rel="noopener noreferrer" data-i18n="issuesLink">Community RFCs & Discussions</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-about-column">
+                    <div
+                        style="font-family: var(--font-mono); font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-xs);" data-i18n="footerAboutHeading">
+                        About</div>
+                    <div class="footer-about-section">
+                        <div style="font-weight: 600; color: var(--text-secondary); margin-bottom: var(--space-2xs);" data-i18n="footerDesignHeading">
+                            Interested in the Design?</div>
+                        <p style="line-height: 1.5; margin-bottom: var(--space-xs);" class="footer-about-text">
+                            <span data-i18n="footerDesignContactPrefix">Contact </span><a href="https://nicholaskoldys.dev" class="footer-about-link" target="_blank" rel="noopener noreferrer" style="color: var(--accent-amber); text-decoration: none;" data-i18n="footerDesignContactLink">NicholasKoldys.dev</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom-row">
+                <div data-i18n="footerLicense">MIT Licensed. Designed and built with verified LMS Color Space in Mind.</div>
+                <div data-i18n="footerCompliance">Language Localized • Web-Accessible • Fast-load • Opt-in-Motion • WCAG 2.2 AA Compliant</div>
+            </div>
+
+            <div class="footer-legal-row">
+                <div class="footer-copyright" data-i18n="footerCopyright">&copy; 2026 Nicholas Koldys. All rights reserved.</div>
+                <div class="footer-disclaimer" data-i18n="footerDisclaimer">Mozilla Firefox is a trademark of the Mozilla Foundation. Google Chrome is a trademark of Google LLC. Apple Safari is a trademark of Apple Inc. All trademarks and registered trademarks are property of their respective owners. Independently developed and not affiliated with or endorsed by Mozilla, Google, or Apple.</div>
+            </div>
+        </div>
+    </footer>
+
+    <aside class="accessibility-btns-host" aria-label="Accessibility and Navigation Controls">
+      <button id="btn-motion-toggle" 
+              class="motion-toggle-btn" 
+              type="button" 
+              aria-label="Pause page motion and animations" 
+              aria-pressed="false"
+              title="Pause page motion">
+        <span class="motion-icon-wrapper icon-pause" aria-hidden="true">
+          <svg class="motion-svg motion-svg-pause" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Spinning circular dashed pattern (Todo-1) -->
+      <g class="motion-spin-group">
+        <circle class="motion-spin-ring" cx="22" cy="22" r="16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="18 10" />
+        <path class="motion-spin-arrow" d="M33 13.5 L38.5 15 L35 20.5" fill="currentColor" />
+      </g>
+      <!-- Central pause symbol || -->
+      <g class="motion-pause-bars">
+        <rect class="pause-bar bar-1" x="16" y="14" width="3.5" height="16" rx="1.75" fill="currentColor" />
+        <rect class="pause-bar bar-2" x="24.5" y="14" width="3.5" height="16" rx="1.75" fill="currentColor" />
+      </g>
+    </svg>
+        </span>
+        <span class="motion-icon-wrapper icon-resume" aria-hidden="true">
+          <svg class="motion-svg motion-svg-resume" viewBox="0 0 54 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+      <!-- Pointer cursor icon (not user controlled, icon only) -->
+      <g class="cursor-pointer-glyph">
+        <path d="M14 14.5 L25 25.5 L20.5 26.5 L23.5 32 L20.5 33.5 L17.5 28 L14 31.5 Z" 
+              fill="currentColor" 
+              stroke="currentColor" 
+              stroke-width="1.2" 
+              stroke-linejoin="round" />
+      </g>
+
+      <!-- Shooting particles radiating from cursor tip -->
+      <g class="cursor-particles-group">
+        <!-- Top-left particle -->
+        <circle class="cursor-particle particle-1" cx="10" cy="10" r="1.8" fill="currentColor" />
+        <line class="cursor-ray ray-1" x1="13" y1="13" x2="9" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+
+        <!-- Top-center particle -->
+        <circle class="cursor-particle particle-2" cx="16" cy="6.5" r="1.8" fill="currentColor" />
+        <line class="cursor-ray ray-2" x1="15.5" y1="11.5" x2="15.5" y2="6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+
+        <!-- Top-right particle -->
+        <circle class="cursor-particle particle-3" cx="23" cy="9.5" r="1.8" fill="currentColor" />
+        <line class="cursor-ray ray-3" x1="18.5" y1="13.5" x2="22.5" y2="9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      </g>
+
+      <!-- Trailing motion velocity crescents / waves ))) (Todo-2) -->
+      <g class="cursor-velocity-crescents">
+        <path class="velocity-crescent crescent-1" 
+              d="M38 12 C42 18, 42 26, 38 32 C37 30.5, 37 13.5, 38 12 Z" 
+              fill="currentColor" />
+        <path class="velocity-crescent crescent-2" 
+              d="M45 13 C49.5 18.5, 49.5 25.5, 45 31 C44 29.5, 44 14.5, 45 13 Z" 
+              fill="currentColor" />
+      </g>
+    </svg>
+        </span>
+      </button>
+
+      <button id="btn-jump-to-top"
+              class="jump-to-top-btn"
+              type="button"
+              aria-label="Jump to top of page"
+              title="Jump to top">
+        <svg class="jump-top-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <line x1="5" y1="4" x2="19" y2="4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+      <path d="M12 20V8M12 8L6 14M12 8L18 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+      </button>
+    </aside>
+
+    <script type="module" src="js/full-detailed-client.js"></script>
+</body>
+
+</html>
